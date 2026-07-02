@@ -1,0 +1,86 @@
+:root {
+  color-scheme: dark;
+  background-color: #0b0d17;
+  color: #f3f4f6;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0d17;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for Sci-Fi Vibe */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0d17;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f293d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  }
+}
+
+@keyframes laserLine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes borderRotate {
+  0% {
+    border-image-source: linear-gradient(0deg, #00f0ff, #8b5cf6);
+  }
+  50% {
+    border-image-source: linear-gradient(180deg, #8b5cf6, #00f0ff);
+  }
+  100% {
+    border-image-source: linear-gradient(360deg, #00f0ff, #8b5cf6);
+  }
+}
