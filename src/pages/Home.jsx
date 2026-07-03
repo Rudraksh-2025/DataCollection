@@ -31,7 +31,7 @@ export default function Home() {
       {/* Hero Section */}
       <Container maxWidth="lg" sx={{ pt: { xs: 8, md: 12 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }}>
         <Typography variant="h1" sx={{
-          fontSize: { xs: '2.5rem', md: '4.5rem' },
+          fontSize: { xs: '2.5rem', md: '3.5rem' },
           fontWeight: 900,
           mb: 3,
           lineHeight: 1.1,
@@ -179,8 +179,8 @@ export default function Home() {
       <Container maxWidth="lg" sx={{ py: 12 }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 6 }}>
           <Typography variant="h3">Available Datasets</Typography>
-          <Button variant="text" color="primary" endIcon={<Typography>→</Typography>} onClick={() => navigate('/datasets')}>
-            View all
+          <Button variant="text" color="primary" onClick={() => navigate('/datasets')}>
+            View all →
           </Button>
         </Stack>
         <Grid container spacing={4}>
@@ -259,7 +259,6 @@ export default function Home() {
             {/* Standard Tier */}
             <Grid size={{ xs: 12, md: 4 }}>
               <Card sx={{ p: 4, height: '100%', borderColor: 'primary.main', border: '2px solid', position: 'relative' }}>
-                <Chip label="MOST POPULAR" color="primary" sx={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', fontWeight: 'bold' }} />
                 <Typography variant="h5" sx={{ mb: 2, color: 'primary.main' }}>Standard License</Typography>
                 <Typography variant="h2" sx={{ mb: 1 }}>$1.50</Typography>
                 <Typography color="text.secondary" sx={{ mb: 4 }}>per episode</Typography>

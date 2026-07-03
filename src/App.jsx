@@ -28,29 +28,29 @@ const darkTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Montserrat", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontFamily: '"Orbitron", "Inter", sans-serif',
+      fontFamily: '"Montserrat", "Inter", sans-serif',
       fontWeight: 800,
     },
     h2: {
-      fontFamily: '"Orbitron", "Inter", sans-serif',
+      fontFamily: '"Montserrat", "Inter", sans-serif',
       fontWeight: 700,
     },
     h3: {
-      fontFamily: '"Orbitron", "Inter", sans-serif',
+      fontFamily: '"Montserrat", "Inter", sans-serif',
       fontWeight: 600,
     },
     h4: {
-      fontFamily: '"Orbitron", "Inter", sans-serif',
+      fontFamily: '"Montserrat", "Inter", sans-serif',
       fontWeight: 600,
     },
     h5: {
-      fontFamily: '"Orbitron", "Inter", sans-serif',
+      fontFamily: '"Montserrat", "Inter", sans-serif',
       fontWeight: 600,
     },
     h6: {
-      fontFamily: '"Orbitron", "Inter", sans-serif',
+      fontFamily: '"Montserrat", "Inter", sans-serif',
       fontWeight: 600,
     },
     button: {

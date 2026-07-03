@@ -77,7 +77,7 @@ export default function Layout() {
                 background: 'linear-gradient(90deg, #ffffff 30%, #00f0ff 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                fontFamily: '"Orbitron", sans-serif'
+                fontFamily: '"Montserrat", sans-serif'
               }}>
                 ROBOSTREAM
               </Typography>
@@ -143,7 +143,7 @@ export default function Layout() {
           <Stack direction={{ xs: 'column', md: 'row' }} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} spacing={3}>
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <Memory sx={{ color: 'primary.main', fontSize: 24 }} />
-              <Typography variant="h6" sx={{ fontFamily: '"Orbitron", sans-serif', fontWeight: 700 }}>
+              <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700 }}>
                 ROBOSTREAM
               </Typography>
             </Stack>
