@@ -43,7 +43,14 @@ export default function Catalogue() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Typography variant="h2" sx={{ mb: 1, color: '#0f172a', fontWeight: 800 }}>Dataset Catalogue</Typography>
+      <Typography variant="h2" sx={{
+        mb: 1, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+        fontFamily: "'Fraunces', serif",
+        letterSpacing: '-0.02em',
+        WebkitFontSmoothing: 'none',
+        MozOsxFontSmoothing: 'unset',
+        textRendering: 'optimizeSpeed',
+      }}>Dataset Catalogue</Typography>
       <Typography variant="h6" color="text.secondary" sx={{ mb: 5, fontWeight: 400 }}>
         Browse our collection of high-fidelity physical manipulation datasets.
       </Typography>
@@ -149,7 +156,7 @@ export default function Catalogue() {
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0f172a' }}>
+                <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a' }}>
                   {dataset.taskType}
                 </Typography>
                 <Chip label={dataset.format} size="small" sx={{ backgroundColor: 'rgba(0,0,0,0.06)', fontWeight: 600, fontSize: '0.75rem' }} />

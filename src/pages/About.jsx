@@ -34,7 +34,14 @@ export default function About() {
       {/* Header */}
       <Box sx={{ pt: 8, pb: 6, textAlign: 'center' }}>
         <Container maxWidth="md">
-          <Typography variant="h1" sx={{ mb: 3, fontSize: { xs: '2.5rem', md: '3.5rem' }, color: '#0f172a', fontWeight: 800 }}>
+          <Typography variant="h1" sx={{
+            mb: 3, fontSize: { xs: '2.5rem', md: '4rem' }, fontWeight: 500, lineHeight: 1.15,
+            fontFamily: "'Fraunces', serif",
+            letterSpacing: '-0.02em',
+            WebkitFontSmoothing: 'none',
+            MozOsxFontSmoothing: 'unset',
+            textRendering: 'optimizeSpeed', color: '#0f172a',
+          }}>
             We build the data that builds physical AI.
           </Typography>
         </Container>
@@ -44,7 +51,14 @@ export default function About() {
         {/* The Why */}
         <Grid container spacing={8} alignItems="center" sx={{ mb: 12 }}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <Typography variant="h3" sx={{ mb: 3, color: '#0f172a', fontWeight: 800 }}>Why we started this</Typography>
+            <Typography variant="h3" sx={{
+              mb: 3, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+              fontFamily: "'Fraunces', serif",
+              letterSpacing: '-0.02em',
+              WebkitFontSmoothing: 'none',
+              MozOsxFontSmoothing: 'unset',
+              textRendering: 'optimizeSpeed',
+            }}>Why we started this</Typography>
             <Typography variant="body1" sx={{ fontSize: '1.1rem', color: '#475569', mb: 3, lineHeight: 1.8 }}>
               The robotics industry is blocked by data. Simulation to real-world transfer is hard, and existing physical datasets are either heavily constrained to lab environments, lack tactile sensing, or require million-dollar teleoperation setups to collect.
             </Typography>
@@ -74,7 +88,14 @@ export default function About() {
         </Grid>
 
         {/* The Team */}
-        <Typography variant="h3" sx={{ mb: 6, textAlign: 'center', color: '#0f172a', fontWeight: 800 }}>The Team</Typography>
+        <Typography variant="h3" sx={{
+          mb: 6, textAlign: 'center', color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+          fontFamily: "'Fraunces', serif",
+          letterSpacing: '-0.02em',
+          WebkitFontSmoothing: 'none',
+          MozOsxFontSmoothing: 'unset',
+          textRendering: 'optimizeSpeed',
+        }}>The Team</Typography>
         <Grid container spacing={4} justifyContent="center">
           {team.map((member) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={member.name}>

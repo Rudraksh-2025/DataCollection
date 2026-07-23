@@ -36,7 +36,14 @@ export default function Contact() {
       <Box sx={{ pt: 8, pb: 6, textAlign: 'center' }}>
         <Container maxWidth="md">
           <Hub sx={{ fontSize: 44, color: '#0f172a', mb: 2 }} />
-          <Typography variant="h2" sx={{ mb: 2, color: '#0f172a', fontWeight: 800 }}>Get in Touch</Typography>
+          <Typography variant="h2" sx={{
+            mb: 2, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+            fontFamily: "'Fraunces', serif",
+            letterSpacing: '-0.02em',
+            WebkitFontSmoothing: 'none',
+            MozOsxFontSmoothing: 'unset',
+            textRendering: 'optimizeSpeed',
+          }}>Get in Touch</Typography>
           <Typography variant="h6" color="text.secondary" sx={{ fontWeight: 400 }}>
             Request full datasets, ask about custom collection, or just say hello.
           </Typography>
@@ -131,7 +138,14 @@ export default function Contact() {
           {/* Contact Info */}
           <Grid size={{ xs: 12, md: 5 }}>
             <Box sx={{ position: 'sticky', top: 100 }}>
-              <Typography variant="h4" sx={{ mb: 3, color: '#0f172a', fontWeight: 800 }}>Direct Contact</Typography>
+              <Typography variant="h4" sx={{
+                mb: 3, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+                fontFamily: "'Fraunces', serif",
+                letterSpacing: '-0.02em',
+                WebkitFontSmoothing: 'none',
+                MozOsxFontSmoothing: 'unset',
+                textRendering: 'optimizeSpeed',
+              }}>Direct Contact</Typography>
               <Typography color="text.secondary" paragraph sx={{ mb: 4, fontSize: '1.05rem', lineHeight: 1.7 }}>
                 Don't like forms? You can email us directly. We respond to all technical enquiries within 24 hours.
               </Typography>

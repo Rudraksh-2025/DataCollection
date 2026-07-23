@@ -210,7 +210,15 @@ export default function Home() {
         borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
         <Container maxWidth="lg">
-          <Typography variant="h3" textAlign="center" sx={{ mb: 8, color: '#0f172a', fontWeight: 800 }}>
+          <Typography variant="h3" textAlign="center" sx={{
+            mb: 8, color: '#0f172a', fontWeight: 500,
+            lineHeight: 1.15,
+            fontFamily: "'Fraunces', serif",
+            letterSpacing: '-0.02em',
+            WebkitFontSmoothing: 'none',
+            MozOsxFontSmoothing: 'unset',
+            textRendering: 'optimizeSpeed',
+          }}>
             The Data Pipeline
           </Typography>
           <Grid container spacing={4}>
@@ -309,8 +317,15 @@ export default function Home() {
 
       {/* Dataset Previews */}
       <Container maxWidth="lg" sx={{ py: 12 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 6 }}>
-          <Typography variant="h3" sx={{ color: '#0f172a', fontWeight: 800 }}>Available Datasets</Typography>
+        <Stack direction="row" sx={{ display: 'flex', justifyContent: 'space-between', mb: 6, alignItems: 'center' }}>
+          <Typography variant="h3" sx={{
+            color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+            fontFamily: "'Fraunces', serif",
+            letterSpacing: '-0.02em',
+            WebkitFontSmoothing: 'none',
+            MozOsxFontSmoothing: 'unset',
+            textRendering: 'optimizeSpeed',
+          }}>Available Datasets</Typography>
           <Button
             variant="text"
             sx={{ color: '#0f172a', fontWeight: 700 }}
@@ -344,7 +359,7 @@ export default function Home() {
                   justifyContent: 'space-between',
                   alignItems: 'center'
                 }}>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0f172a' }}>
+                  <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a' }}>
                     {dataset.taskType}
                   </Typography>
                   <Chip label={dataset.format} size="small" sx={{ backgroundColor: 'rgba(0,0,0,0.06)', fontWeight: 600, fontSize: '0.75rem' }} />
@@ -398,7 +413,14 @@ export default function Home() {
         borderTop: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
         <Container maxWidth="lg">
-          <Typography variant="h3" textAlign="center" sx={{ mb: 2, color: '#0f172a', fontWeight: 800 }}>
+          <Typography variant="h3" textAlign="center" sx={{
+            mb: 2, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+            fontFamily: "'Fraunces', serif",
+            letterSpacing: '-0.02em',
+            WebkitFontSmoothing: 'none',
+            MozOsxFontSmoothing: 'unset',
+            textRendering: 'optimizeSpeed',
+          }}>
             Simple, transparent pricing
           </Typography>
           <Typography variant="h6" color="text.secondary" textAlign="center" sx={{ mb: 8, fontWeight: 400 }}>
