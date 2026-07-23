@@ -42,19 +42,21 @@ export default function Catalogue() {
   });
 
   return (
-    <Container maxWidth="lg" sx={{ py: 8 }}>
-      <Typography variant="h2" sx={{ mb: 2 }}>Dataset Catalogue</Typography>
-      <Typography variant="h6" color="text.secondary" sx={{ mb: 6, fontWeight: 400 }}>
+    <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Typography variant="h2" sx={{ mb: 1, color: '#0f172a', fontWeight: 800 }}>Dataset Catalogue</Typography>
+      <Typography variant="h6" color="text.secondary" sx={{ mb: 5, fontWeight: 400 }}>
         Browse our collection of high-fidelity physical manipulation datasets.
       </Typography>
 
-      {/* Filters */}
+      {/* Glassmorphic Filters Header Box */}
       <Box sx={{
         p: 3,
         mb: 6,
-        borderRadius: 3,
-        backgroundColor: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.1)'
+        borderRadius: '20px',
+        backgroundColor: 'rgba(255, 255, 255, 0.75)',
+        backdropFilter: 'blur(16px)',
+        border: '1px solid rgba(255, 255, 255, 0.95)',
+        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)'
       }}>
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
@@ -65,6 +67,7 @@ export default function Catalogue() {
                 value={taskFilter}
                 label="Task Type"
                 onChange={(e) => setTaskFilter(e.target.value)}
+                sx={{ borderRadius: '12px' }}
               >
                 <MenuItem value=""><em>All</em></MenuItem>
                 {taskOptions.map(t => <MenuItem key={t} value={t}>{t}</MenuItem>)}
@@ -79,6 +82,7 @@ export default function Catalogue() {
                 value={modalityFilter}
                 label="Sensor Modality"
                 onChange={(e) => setModalityFilter(e.target.value)}
+                sx={{ borderRadius: '12px' }}
               >
                 <MenuItem value=""><em>All</em></MenuItem>
                 <MenuItem value="vision">Vision</MenuItem>
@@ -94,6 +98,7 @@ export default function Catalogue() {
                 value={materialFilter}
                 label="Object Material"
                 onChange={(e) => setMaterialFilter(e.target.value)}
+                sx={{ borderRadius: '12px' }}
               >
                 <MenuItem value=""><em>All</em></MenuItem>
                 {materialOptions.map(m => <MenuItem key={m} value={m}>{m}</MenuItem>)}
@@ -108,6 +113,7 @@ export default function Catalogue() {
                 value={formatFilter}
                 label="Format"
                 onChange={(e) => setFormatFilter(e.target.value)}
+                sx={{ borderRadius: '12px' }}
               >
                 <MenuItem value=""><em>All</em></MenuItem>
                 {formatOptions.map(f => <MenuItem key={f} value={f}>{f}</MenuItem>)}
@@ -125,32 +131,59 @@ export default function Catalogue() {
               height: '100%',
               display: 'flex',
               flexDirection: 'column',
+              overflow: 'hidden',
               transition: 'transform 0.3s, box-shadow 0.3s',
               '&:hover': {
-                transform: 'translateY(-8px)',
-                boxShadow: '0 12px 24px rgba(0,240,255,0.15)'
+                transform: 'translateY(-6px)',
+                boxShadow: '0 16px 36px rgba(0,0,0,0.08)'
               }
             }}>
+              {/* Glass Header Bar */}
+              <Box sx={{
+                p: 1.5,
+                px: 2.5,
+                backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(12px)',
+                borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0f172a' }}>
+                  {dataset.taskType}
+                </Typography>
+                <Chip label={dataset.format} size="small" sx={{ backgroundColor: 'rgba(0,0,0,0.06)', fontWeight: 600, fontSize: '0.75rem' }} />
+              </Box>
               <CardMedia
                 component="img"
-                height="200"
+                height="190"
                 image={dataset.thumbnail}
                 alt={dataset.name}
               />
-              <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                <Typography variant="h5" sx={{ mb: 1 }}>{dataset.name}</Typography>
+              <CardContent sx={{ flexGrow: 1, p: 3, display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 700, color: '#0f172a' }}>{dataset.name}</Typography>
                 <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
-                  <Chip label={`${dataset.episodes} episodes`} size="small" sx={{ backgroundColor: 'rgba(255,255,255,0.1)' }} />
+                  <Chip label={`${dataset.episodes} episodes`} size="small" sx={{ backgroundColor: 'rgba(0,0,0,0.05)', color: '#475569' }} />
                   {dataset.modality.map(m => (
-                    <Chip key={m} label={m} size="small" color={m === 'tactile' ? 'secondary' : 'default'} sx={{ opacity: 0.9 }} />
+                    <Chip key={m} label={m} size="small" variant="outlined" sx={{ borderColor: 'rgba(0,0,0,0.12)', color: '#475569' }} />
                   ))}
                 </Stack>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3, flexGrow: 1 }}>
                   {dataset.description}
                 </Typography>
                 <Button
                   variant="outlined"
                   fullWidth
+                  sx={{
+                    borderRadius: '24px',
+                    color: '#0f172a',
+                    borderColor: 'rgba(0,0,0,0.2)',
+                    fontWeight: 600,
+                    '&:hover': {
+                      borderColor: '#0f172a',
+                      backgroundColor: 'rgba(0,0,0,0.04)'
+                    }
+                  }}
                   onClick={() => navigate(`/datasets/${dataset.id}`)}
                 >
                   View details

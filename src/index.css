@@ -1,7 +1,7 @@
 :root {
-  color-scheme: dark;
-  background-color: #0b0d17;
-  color: #f3f4f6;
+  color-scheme: light;
+  background-color: #FEFFFC;
+  color: #1e293b;
   font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
@@ -12,31 +12,47 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #0b0d17;
+  background-color: #FEFFFC;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    radial-gradient(circle at 50% -10%, rgba(220, 226, 235, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 85% 85%, rgba(225, 232, 240, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 15% 50%, rgba(240, 243, 248, 0.5) 0%, transparent 45%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Custom Scrollbar for Sci-Fi Vibe */
+/* Glassmorphism utility classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06), 0 2px 8px 0 rgba(0, 0, 0, 0.03) !important;
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0d17;
+  background: #FEFFFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f293d;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f0ff;
-  box-shadow: 0 0 10px #00f0ff;
+  background: #94a3b8;
 }
 
 /* Animations */
@@ -45,7 +61,7 @@ body {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
   100% {
     transform: translateY(0px);
@@ -54,33 +70,12 @@ body {
 
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 15px rgba(30, 41, 59, 0.08);
   }
   50% {
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 25px rgba(30, 41, 59, 0.15);
   }
   100% {
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-  }
-}
-
-@keyframes laserLine {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-@keyframes borderRotate {
-  0% {
-    border-image-source: linear-gradient(0deg, #00f0ff, #8b5cf6);
-  }
-  50% {
-    border-image-source: linear-gradient(180deg, #8b5cf6, #00f0ff);
-  }
-  100% {
-    border-image-source: linear-gradient(360deg, #00f0ff, #8b5cf6);
+    box-shadow: 0 0 15px rgba(30, 41, 59, 0.08);
   }
 }

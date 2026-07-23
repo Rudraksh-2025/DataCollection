@@ -9,22 +9,22 @@ import DatasetDetail from './pages/DatasetDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
 
-const darkTheme = createTheme({
+const lightTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
-      main: '#00f0ff', // Cyber Cyan
+      main: '#1f242d', // Sleek dark charcoal/slate like screenshot pill button
     },
     secondary: {
-      main: '#8b5cf6', // Violet
+      main: '#475569', // Slate accent
     },
     background: {
-      default: '#0b0d17',
-      paper: '#111827',
+      default: '#FEFFFC',
+      paper: 'rgba(255, 255, 255, 0.8)',
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#94a3b8',
+      primary: '#1e293b',
+      secondary: '#64748b',
     },
   },
   typography: {
@@ -56,25 +56,42 @@ const darkTheme = createTheme({
     button: {
       textTransform: 'none',
       fontWeight: 600,
-      letterSpacing: '0.5px'
+      letterSpacing: '0.2px'
     }
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          padding: '10px 24px',
+          borderRadius: 24,
+          padding: '8px 20px',
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          }
         }
       }
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
-          backgroundColor: 'rgba(17, 24, 39, 0.7)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255,255,255,0.05)',
+          borderRadius: 20,
+          backgroundColor: 'rgba(255, 255, 255, 0.75)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02)',
+        }
+      }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(255, 255, 255, 0.75)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
         }
       }
     }
@@ -83,7 +100,7 @@ const darkTheme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>

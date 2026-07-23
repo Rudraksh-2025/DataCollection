@@ -11,14 +11,15 @@ import {
   CardMedia,
   Stack,
   Chip,
-  Divider,
 } from '@mui/material';
 import {
   Videocam,
   PrecisionManufacturing,
   AssignmentTurnedIn,
   CheckCircle,
-  Download
+  Download,
+  Work,
+  ArrowForward,
 } from '@mui/icons-material';
 import { datasets } from '../data/mockDatasets';
 
@@ -29,41 +30,66 @@ export default function Home() {
   return (
     <Box sx={{ pb: 8 }}>
       {/* Hero Section */}
-      <Container maxWidth="lg" sx={{ pt: { xs: 8, md: 12 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }}>
-        <Typography variant="h1" sx={{
-          fontSize: { xs: '2.5rem', md: '3.5rem' },
-          fontWeight: 900,
+      <Container maxWidth="lg" sx={{ pt: { xs: 6, md: 10 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }}>
+        {/* Subtle Pill Tagline like screenshot */}
+        <Box sx={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 1,
+          px: 2,
+          py: 0.8,
+          borderRadius: '20px',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          border: '1px solid rgba(0, 0, 0, 0.06)',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
           mb: 3,
-          lineHeight: 1.1,
-          background: 'linear-gradient(135deg, #ffffff 30%, #00f0ff 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
+        }}>
+          <Work sx={{ fontSize: 16, color: '#64748b' }} />
+          <Typography variant="body2" sx={{ color: '#64748b', fontWeight: 500, fontSize: '0.85rem' }}>
+            Working at scale with physical AI
+          </Typography>
+        </Box>
+
+        <Typography variant="h1" sx={{
+          fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.2rem' },
+          fontWeight: 800,
+          mb: 3,
+          lineHeight: 1.15,
+          color: '#0f172a',
+          fontFamily: '"Georgia", "Playfair Display", "Montserrat", serif',
+          letterSpacing: '-0.02em',
         }}>
           Egocentric manipulation datasets<br />with vision + tactile data
         </Typography>
+
         <Typography variant="h5" sx={{
-          color: 'text.secondary',
+          color: '#475569',
           mb: 5,
           fontWeight: 400,
-          maxWidth: '800px',
-          mx: 'auto'
+          maxWidth: '750px',
+          mx: 'auto',
+          lineHeight: 1.6,
+          fontSize: { xs: '1.1rem', md: '1.25rem' }
         }}>
-          High-fidelity physical trajectories ready for robot policy training.
+          High-fidelity physical trajectories ready for robot policy training and imitation learning.
         </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 8 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 8, flexWrap: 'wrap' }}>
           <Button
             variant="contained"
-            color="primary"
             size="large"
             endIcon={<Download />}
             sx={{
               py: 1.5,
-              px: 4,
-              fontSize: '1.1rem',
-              boxShadow: '0 0 20px rgba(0, 240, 255, 0.4)',
+              px: 3.5,
+              fontSize: '1rem',
+              fontWeight: 600,
+              backgroundColor: '#1f242d',
+              color: '#ffffff',
+              borderRadius: '30px',
               '&:hover': {
-                boxShadow: '0 0 30px rgba(0, 240, 255, 0.6)',
+                backgroundColor: '#0f172a',
+                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.25)',
               }
             }}
             onClick={() => navigate('/datasets')}
@@ -72,55 +98,72 @@ export default function Home() {
           </Button>
           <Button
             variant="outlined"
-            color="secondary"
             size="large"
-            sx={{ py: 1.5, px: 4, fontSize: '1.1rem' }}
+            endIcon={<ArrowForward />}
+            sx={{
+              py: 1.5,
+              px: 3.5,
+              fontSize: '1rem',
+              fontWeight: 600,
+              color: '#1e293b',
+              borderColor: 'rgba(0,0,0,0.15)',
+              borderRadius: '30px',
+              backgroundColor: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(10px)',
+              '&:hover': {
+                borderColor: '#1e293b',
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              }
+            }}
             onClick={() => navigate('/datasets')}
           >
             View Catalogue
           </Button>
         </Box>
 
-        {/* Trust Signals */}
+        {/* Trust Signals Glass Pill */}
         <Box sx={{
-          display: 'flex',
+          display: 'inline-flex',
           justifyContent: 'center',
+          alignItems: 'center',
           flexWrap: 'wrap',
-          gap: { xs: 2, md: 4 },
-          px: 2,
-          py: 3,
-          borderRadius: 4,
-          backgroundColor: 'rgba(255, 255, 255, 0.03)',
-          border: '1px solid rgba(255, 255, 255, 0.1)'
+          gap: { xs: 2, md: 3 },
+          px: 4,
+          py: 2,
+          borderRadius: '50px',
+          backgroundColor: 'rgba(255, 255, 255, 0.75)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)'
         }}>
-          <Typography variant="h6" color="primary.main" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <span style={{ color: 'white' }}>1,200+</span> Episodes
+          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
+            1,200+ <span style={{ fontWeight: 400, color: '#64748b' }}>Episodes</span>
           </Typography>
-          <Typography variant="h6" color="text.secondary">·</Typography>
-          <Typography variant="h6" color="primary.main" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <span style={{ color: 'white' }}>8</span> Tasks
+          <Typography variant="body2" color="text.secondary">•</Typography>
+          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
+            8 <span style={{ fontWeight: 400, color: '#64748b' }}>Tasks</span>
           </Typography>
-          <Typography variant="h6" color="text.secondary">·</Typography>
-          <Typography variant="h6" color="primary.main" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <span style={{ color: 'white' }}>LeRobot</span> Format
+          <Typography variant="body2" color="text.secondary">•</Typography>
+          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
+            LeRobot <span style={{ fontWeight: 400, color: '#64748b' }}>Format</span>
           </Typography>
-          <Typography variant="h6" color="text.secondary">·</Typography>
-          <Typography variant="h6" color="primary.main" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <span style={{ color: 'white' }}>HuggingFace</span> Verified
+          <Typography variant="body2" color="text.secondary">•</Typography>
+          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
+            HuggingFace <span style={{ fontWeight: 400, color: '#64748b' }}>Verified</span>
           </Typography>
         </Box>
       </Container>
 
-      {/* Media Highlight (Video placeholder) */}
+      {/* Media Highlight (Glassmorphic Preview Frame) */}
       <Container maxWidth="lg" sx={{ mb: 12 }}>
         <Box sx={{
           width: '100%',
-          height: { xs: '300px', md: '500px' },
-          borderRadius: 4,
+          height: { xs: '300px', md: '480px' },
+          borderRadius: '24px',
           overflow: 'hidden',
           position: 'relative',
-          border: '1px solid rgba(0,240,255,0.3)',
-          boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05)',
           backgroundImage: 'url(https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1200)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -131,45 +174,131 @@ export default function Home() {
           <Box sx={{
             position: 'absolute',
             inset: 0,
-            backgroundColor: 'rgba(0,0,0,0.4)'
+            backgroundColor: 'rgba(15, 23, 42, 0.25)',
+            backdropFilter: 'blur(2px)',
           }} />
-          <Button variant="contained" color="primary" sx={{ zIndex: 2, borderRadius: '50%', width: 80, height: 80, p: 0 }}>
-            <Typography variant="h3">▶</Typography>
+          <Button variant="contained" sx={{
+            zIndex: 2,
+            borderRadius: '50%',
+            width: 76,
+            height: 76,
+            minWidth: 'auto',
+            p: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            color: '#1f242d',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+            '&:hover': {
+              backgroundColor: '#ffffff',
+              transform: 'scale(1.05)',
+            }
+          }}>
+            <Typography variant="h4" sx={{ ml: 0.5 }}>▶</Typography>
           </Button>
         </Box>
       </Container>
 
       {/* What We Offer */}
-      <Box sx={{ backgroundColor: 'background.paper', py: 10, borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        backdropFilter: 'blur(20px)',
+        py: 10,
+        borderTop: '1px solid rgba(0, 0, 0, 0.05)',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
+      }}>
         <Container maxWidth="lg">
-          <Typography variant="h3" textAlign="center" sx={{ mb: 8 }}>The Data Pipeline</Typography>
+          <Typography variant="h3" textAlign="center" sx={{ mb: 8, color: '#0f172a', fontWeight: 800 }}>
+            The Data Pipeline
+          </Typography>
           <Grid container spacing={4}>
             <Grid size={{ xs: 12, md: 4 }}>
-              <Box sx={{ p: 4, height: '100%', backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: 4, transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)' } }}>
-                <Videocam sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
-                <Typography variant="h5" sx={{ mb: 2 }}>Vision Data</Typography>
-                <Typography color="text.secondary">
-                  Egocentric wrist and overhead video streams synchronized perfectly. Captured at 4K resolution and 60fps for maximum detail.
-                </Typography>
-              </Box>
+              <Card sx={{
+                height: '100%',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease',
+                '&:hover': { transform: 'translateY(-6px)' }
+              }}>
+                {/* Glass Header Bar */}
+                <Box sx={{
+                  p: 2.5,
+                  backgroundColor: 'rgba(255, 255, 255, 0.65)',
+                  backdropFilter: 'blur(12px)',
+                  borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5
+                }}>
+                  <Videocam sx={{ fontSize: 28, color: '#0f172a' }} />
+                  <Typography variant="h6" sx={{ color: '#0f172a', fontWeight: 700 }}>
+                    Vision Data
+                  </Typography>
+                </Box>
+                <CardContent sx={{ p: 3 }}>
+                  <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                    Egocentric wrist and overhead video streams synchronized perfectly. Captured at 4K resolution and 60fps for maximum detail.
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
+
             <Grid size={{ xs: 12, md: 4 }}>
-              <Box sx={{ p: 4, height: '100%', backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: 4, transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)' } }}>
-                <PrecisionManufacturing sx={{ fontSize: 48, color: 'secondary.main', mb: 2 }} />
-                <Typography variant="h5" sx={{ mb: 2 }}>Tactile Data</Typography>
-                <Typography color="text.secondary">
-                  High-frequency 100Hz physical contact data. Includes FSR force sensing, flex sensor curvature, and IMU orientations.
-                </Typography>
-              </Box>
+              <Card sx={{
+                height: '100%',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease',
+                '&:hover': { transform: 'translateY(-6px)' }
+              }}>
+                {/* Glass Header Bar */}
+                <Box sx={{
+                  p: 2.5,
+                  backgroundColor: 'rgba(255, 255, 255, 0.65)',
+                  backdropFilter: 'blur(12px)',
+                  borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5
+                }}>
+                  <PrecisionManufacturing sx={{ fontSize: 28, color: '#0f172a' }} />
+                  <Typography variant="h6" sx={{ color: '#0f172a', fontWeight: 700 }}>
+                    Tactile Data
+                  </Typography>
+                </Box>
+                <CardContent sx={{ p: 3 }}>
+                  <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                    High-frequency 100Hz physical contact data. Includes FSR force sensing, flex sensor curvature, and IMU orientations.
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
+
             <Grid size={{ xs: 12, md: 4 }}>
-              <Box sx={{ p: 4, height: '100%', backgroundColor: 'rgba(0,0,0,0.2)', borderRadius: 4, transition: 'transform 0.3s', '&:hover': { transform: 'translateY(-5px)' } }}>
-                <AssignmentTurnedIn sx={{ fontSize: 48, color: '#10b981', mb: 2 }} />
-                <Typography variant="h5" sx={{ mb: 2 }}>Annotations</Typography>
-                <Typography color="text.secondary">
-                  Rich metadata for every episode including phase labels, contact events, bounding boxes, and success/fail flags.
-                </Typography>
-              </Box>
+              <Card sx={{
+                height: '100%',
+                overflow: 'hidden',
+                transition: 'all 0.3s ease',
+                '&:hover': { transform: 'translateY(-6px)' }
+              }}>
+                {/* Glass Header Bar */}
+                <Box sx={{
+                  p: 2.5,
+                  backgroundColor: 'rgba(255, 255, 255, 0.65)',
+                  backdropFilter: 'blur(12px)',
+                  borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5
+                }}>
+                  <AssignmentTurnedIn sx={{ fontSize: 28, color: '#0f172a' }} />
+                  <Typography variant="h6" sx={{ color: '#0f172a', fontWeight: 700 }}>
+                    Annotations
+                  </Typography>
+                </Box>
+                <CardContent sx={{ p: 3 }}>
+                  <Typography color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                    Rich metadata for every episode including phase labels, contact events, bounding boxes, and success/fail flags.
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
           </Grid>
         </Container>
@@ -178,8 +307,12 @@ export default function Home() {
       {/* Dataset Previews */}
       <Container maxWidth="lg" sx={{ py: 12 }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 6 }}>
-          <Typography variant="h3">Available Datasets</Typography>
-          <Button variant="text" color="primary" onClick={() => navigate('/datasets')}>
+          <Typography variant="h3" sx={{ color: '#0f172a', fontWeight: 800 }}>Available Datasets</Typography>
+          <Button
+            variant="text"
+            sx={{ color: '#0f172a', fontWeight: 700 }}
+            onClick={() => navigate('/datasets')}
+          >
             View all →
           </Button>
         </Stack>
@@ -190,32 +323,59 @@ export default function Home() {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
+                overflow: 'hidden',
                 transition: 'transform 0.3s, box-shadow 0.3s',
                 '&:hover': {
                   transform: 'translateY(-8px)',
-                  boxShadow: '0 12px 24px rgba(0,240,255,0.15)'
+                  boxShadow: '0 16px 40px rgba(0, 0, 0, 0.08)'
                 }
               }}>
+                {/* Glass Header Banner */}
+                <Box sx={{
+                  p: 1.5,
+                  px: 2.5,
+                  backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                  backdropFilter: 'blur(12px)',
+                  borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0f172a' }}>
+                    {dataset.taskType}
+                  </Typography>
+                  <Chip label={dataset.format} size="small" sx={{ backgroundColor: 'rgba(0,0,0,0.06)', fontWeight: 600, fontSize: '0.75rem' }} />
+                </Box>
                 <CardMedia
                   component="img"
-                  height="200"
+                  height="180"
                   image={dataset.thumbnail}
                   alt={dataset.name}
                 />
-                <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                  <Typography variant="h5" sx={{ mb: 1 }}>{dataset.name}</Typography>
+                <CardContent sx={{ flexGrow: 1, p: 3, display: 'flex', flexDirection: 'column' }}>
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 700, color: '#0f172a' }}>{dataset.name}</Typography>
                   <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
-                    <Chip label={`${dataset.episodes} episodes`} size="small" sx={{ backgroundColor: 'rgba(255,255,255,0.1)' }} />
+                    <Chip label={`${dataset.episodes} episodes`} size="small" sx={{ backgroundColor: 'rgba(0,0,0,0.05)', color: '#475569' }} />
                     {dataset.modality.map(m => (
-                      <Chip key={m} label={m} size="small" color={m === 'tactile' ? 'secondary' : 'default'} sx={{ opacity: 0.9 }} />
+                      <Chip key={m} label={m} size="small" variant="outlined" sx={{ borderColor: 'rgba(0,0,0,0.12)', color: '#475569' }} />
                     ))}
                   </Stack>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3, flexGrow: 1 }}>
                     {dataset.description.substring(0, 100)}...
                   </Typography>
                   <Button
                     variant="outlined"
                     fullWidth
+                    sx={{
+                      borderRadius: '24px',
+                      color: '#0f172a',
+                      borderColor: 'rgba(0,0,0,0.2)',
+                      fontWeight: 600,
+                      '&:hover': {
+                        borderColor: '#0f172a',
+                        backgroundColor: 'rgba(0,0,0,0.04)'
+                      }
+                    }}
                     onClick={() => navigate(`/datasets/${dataset.id}`)}
                   >
                     View dataset
@@ -227,10 +387,17 @@ export default function Home() {
         </Grid>
       </Container>
 
-      {/* Pricing */}
-      <Box sx={{ backgroundColor: 'background.paper', py: 12 }}>
+      {/* Pricing Section */}
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        backdropFilter: 'blur(20px)',
+        py: 12,
+        borderTop: '1px solid rgba(0, 0, 0, 0.05)'
+      }}>
         <Container maxWidth="lg">
-          <Typography variant="h3" textAlign="center" sx={{ mb: 2 }}>Simple, transparent pricing</Typography>
+          <Typography variant="h3" textAlign="center" sx={{ mb: 2, color: '#0f172a', fontWeight: 800 }}>
+            Simple, transparent pricing
+          </Typography>
           <Typography variant="h6" color="text.secondary" textAlign="center" sx={{ mb: 8, fontWeight: 400 }}>
             Get exactly the data you need for your models.
           </Typography>
@@ -238,62 +405,85 @@ export default function Home() {
           <Grid container spacing={4} alignItems="center">
             {/* Free Tier */}
             <Grid size={{ xs: 12, md: 4 }}>
-              <Card sx={{ p: 4, height: '100%' }}>
-                <Typography variant="h5" sx={{ mb: 2 }}>Free Sample</Typography>
-                <Typography variant="h2" sx={{ mb: 4 }}>$0</Typography>
-                <Stack spacing={2} sx={{ mb: 4 }}>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> 10 episodes per task
-                  </Typography>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> Full sensor stack included
-                  </Typography>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> Non-commercial use
-                  </Typography>
-                </Stack>
-                <Button variant="outlined" fullWidth size="large" onClick={() => navigate('/datasets')}>Download Now</Button>
+              <Card sx={{ overflow: 'hidden' }}>
+                <Box sx={{ p: 2.5, backgroundColor: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a' }}>Free Sample</Typography>
+                </Box>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ mb: 3, fontWeight: 800, color: '#0f172a' }}>$0</Typography>
+                  <Stack spacing={2} sx={{ mb: 4 }}>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> 10 episodes per task
+                    </Typography>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Full sensor stack included
+                    </Typography>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Non-commercial use
+                    </Typography>
+                  </Stack>
+                  <Button variant="outlined" fullWidth size="large" sx={{ borderRadius: '24px', color: '#0f172a', borderColor: 'rgba(0,0,0,0.2)' }} onClick={() => navigate('/datasets')}>
+                    Download Now
+                  </Button>
+                </CardContent>
               </Card>
             </Grid>
 
             {/* Standard Tier */}
             <Grid size={{ xs: 12, md: 4 }}>
-              <Card sx={{ p: 4, height: '100%', borderColor: 'primary.main', border: '2px solid', position: 'relative' }}>
-                <Typography variant="h5" sx={{ mb: 2, color: 'primary.main' }}>Standard License</Typography>
-                <Typography variant="h2" sx={{ mb: 1 }}>$1.50</Typography>
-                <Typography color="text.secondary" sx={{ mb: 4 }}>per episode</Typography>
-                <Stack spacing={2} sx={{ mb: 4 }}>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> Access to full datasets
-                  </Typography>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> Commercial license
-                  </Typography>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> 1 year of updates
-                  </Typography>
-                </Stack>
-                <Button variant="contained" fullWidth size="large" onClick={() => navigate('/contact')}>Purchase Dataset</Button>
+              <Card sx={{
+                overflow: 'hidden',
+                border: '2px solid #1f242d',
+                transform: { md: 'scale(1.05)' },
+                boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
+              }}>
+                <Box sx={{ p: 2.5, backgroundColor: '#1f242d', color: '#ffffff' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700 }}>Standard License</Typography>
+                </Box>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ mb: 0.5, fontWeight: 800, color: '#0f172a' }}>$1.50</Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>per episode</Typography>
+                  <Stack spacing={2} sx={{ mb: 4 }}>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Access to full datasets
+                    </Typography>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Commercial license
+                    </Typography>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> 1 year of updates
+                    </Typography>
+                  </Stack>
+                  <Button variant="contained" fullWidth size="large" sx={{ borderRadius: '24px', backgroundColor: '#1f242d', color: '#ffffff', '&:hover': { backgroundColor: '#0f172a' } }} onClick={() => navigate('/contact')}>
+                    Purchase Dataset
+                  </Button>
+                </CardContent>
               </Card>
             </Grid>
 
             {/* Enterprise Tier */}
             <Grid size={{ xs: 12, md: 4 }}>
-              <Card sx={{ p: 4, height: '100%' }}>
-                <Typography variant="h5" sx={{ mb: 2 }}>Enterprise</Typography>
-                <Typography variant="h2" sx={{ mb: 4 }}>Custom</Typography>
-                <Stack spacing={2} sx={{ mb: 4 }}>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> Custom task collection
-                  </Typography>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> Large volume discount
-                  </Typography>
-                  <Typography variant="body1" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CheckCircle color="primary" fontSize="small" /> NDA & Custom invoicing
-                  </Typography>
-                </Stack>
-                <Button variant="outlined" fullWidth size="large" onClick={() => navigate('/contact')}>Contact Sales</Button>
+              <Card sx={{ overflow: 'hidden' }}>
+                <Box sx={{ p: 2.5, backgroundColor: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a' }}>Enterprise</Typography>
+                </Box>
+                <CardContent sx={{ p: 4 }}>
+                  <Typography variant="h2" sx={{ mb: 3, fontWeight: 800, color: '#0f172a' }}>Custom</Typography>
+                  <Stack spacing={2} sx={{ mb: 4 }}>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Custom task collection
+                    </Typography>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Large volume discount
+                    </Typography>
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
+                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> NDA & Custom invoicing
+                    </Typography>
+                  </Stack>
+                  <Button variant="outlined" fullWidth size="large" sx={{ borderRadius: '24px', color: '#0f172a', borderColor: 'rgba(0,0,0,0.2)' }} onClick={() => navigate('/contact')}>
+                    Contact Sales
+                  </Button>
+                </CardContent>
               </Card>
             </Grid>
           </Grid>
