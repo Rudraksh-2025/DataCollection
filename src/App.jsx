@@ -9,6 +9,13 @@ import DatasetDetail from './pages/DatasetDetail';
 import About from './pages/About';
 import Contact from './pages/Contact';
 
+const headingStyle = {
+  fontFamily: "'Fraunces', serif",
+  WebkitFontSmoothing: 'none',
+  MozOsxFontSmoothing: 'unset',
+  textRendering: 'optimizeSpeed',
+};
+
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
@@ -30,27 +37,27 @@ const lightTheme = createTheme({
   typography: {
     fontFamily: '"Montserrat", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontFamily: '"Montserrat", "Inter", sans-serif',
+      ...headingStyle,
       fontWeight: 800,
     },
     h2: {
-      fontFamily: '"Montserrat", "Inter", sans-serif',
+      ...headingStyle,
       fontWeight: 700,
     },
     h3: {
-      fontFamily: '"Montserrat", "Inter", sans-serif',
+      ...headingStyle,
       fontWeight: 600,
     },
     h4: {
-      fontFamily: '"Montserrat", "Inter", sans-serif',
+      ...headingStyle,
       fontWeight: 600,
     },
     h5: {
-      fontFamily: '"Montserrat", "Inter", sans-serif',
+      ...headingStyle,
       fontWeight: 600,
     },
     h6: {
-      fontFamily: '"Montserrat", "Inter", sans-serif',
+      ...headingStyle,
       fontWeight: 600,
     },
     button: {
@@ -60,6 +67,16 @@ const lightTheme = createTheme({
     }
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        h1, h2, h3, h4, h5, h6 {
+          font-family: 'Fraunces', serif !important;
+          -webkit-font-smoothing: none !important;
+          -moz-osx-font-smoothing: unset !important;
+          text-rendering: optimizeSpeed !important;
+        }
+      `,
+    },
     MuiButton: {
       styleOverrides: {
         root: {

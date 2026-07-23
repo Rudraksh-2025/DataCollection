@@ -52,12 +52,15 @@ export default function Home() {
 
         <Typography variant="h1" sx={{
           fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.2rem' },
-          fontWeight: 800,
+          fontWeight: 300,
           mb: 3,
           lineHeight: 1.15,
           color: '#0f172a',
-          fontFamily: '"Georgia", "Playfair Display", "Montserrat", serif',
+          fontFamily: "'Fraunces', serif",
           letterSpacing: '-0.02em',
+          WebkitFontSmoothing: 'none',
+          MozOsxFontSmoothing: 'unset',
+          textRendering: 'optimizeSpeed',
         }}>
           Egocentric manipulation datasets<br />with vision + tactile data
         </Typography>

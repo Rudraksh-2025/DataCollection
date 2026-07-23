@@ -89,7 +89,7 @@ export default function Layout() {
           transition: 'all 0.3s ease',
         }}>
           {/* Left Icon / Logo */}
-          <IconButton
+          {/* <IconButton
             component={RouterLink}
             to="/"
             size="small"
@@ -102,7 +102,7 @@ export default function Layout() {
             }}
           >
             <WbSunnyOutlined sx={{ fontSize: 22, color: '#334155' }} />
-          </IconButton>
+          </IconButton> */}
 
           {/* Centered Navigation Links */}
           <Stack direction="row" spacing={{ xs: 1, sm: 2.5 }} alignItems="center">
