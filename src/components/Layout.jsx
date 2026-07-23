@@ -88,6 +88,7 @@ export default function Layout() {
           boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03)',
           transition: 'all 0.3s ease',
         }}>
+          {/* confole,logasdddaddadd */}
           {/* Left Icon / Logo */}
           {/* <IconButton
             component={RouterLink}
