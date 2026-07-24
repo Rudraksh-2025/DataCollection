@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -20,143 +20,213 @@ import {
   Download,
   Work,
   ArrowForward,
+  ChevronRight,
 } from '@mui/icons-material';
 import { datasets } from '../data/mockDatasets';
 import RevealSection from '../components/RevealSection';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import backgroundImage from '../assets/image2.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const navigate = useNavigate();
   const previewDatasets = datasets.slice(0, 3);
+  const parallaxRef = useRef(null);
+
+  useEffect(() => {
+    const container = parallaxRef.current;
+    if (!container) return;
+
+    const ctx = gsap.context(() => {
+      // set initial centering state that GSAP will own from now on
+      gsap.set('.parallax-title', { xPercent: -50 });
+
+      gsap.to('.parallax-sky', {
+        yPercent: 15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      gsap.to('.parallax-title', {
+        yPercent: -20, // xPercent: -50 stays intact since GSAP merges it
+        opacity: 0.2,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      gsap.to('.parallax-foreground', {
+        yPercent: -5,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <Box sx={{ pb: 8 }}>
-      {/* Hero Section */}
-      <RevealSection Component={Container} maxWidth="lg" sx={{ pt: { xs: 6, md: 10 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }} once={true} selector=".hero-reveal">
-        {/* Subtle Pill Tagline like screenshot */}
-        <Box className="hero-reveal" sx={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 1,
-          px: 2,
-          py: 0.8,
-          borderRadius: '20px',
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          border: '1px solid rgba(0, 0, 0, 0.06)',
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
-          mb: 3,
-        }}>
-          <Work sx={{ fontSize: 16, color: '#64748b' }} />
-          <Typography variant="body2" sx={{ color: '#64748b', fontWeight: 500, fontSize: '0.85rem' }}>
-            Working at scale with physical AI
-          </Typography>
-        </Box>
+      {/* Parallax Hero Section */}
+      <Box
+        ref={parallaxRef}
+        sx={{
+          position: 'relative',
+          height: '100vh',
+          width: '100%',
+          overflow: 'hidden',
+          backgroundColor: '#b85f58',
+          mb: 6,
+          mt: -12, // Pull up under the floating navbar
+          pt: 12,
+        }}
+      >
+        {/* Layer 1: Background Image */}
+        <Box
+          className="parallax-sky"
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '130%', // extra height for parallax scroll range
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+        />
 
-        <Typography className="hero-reveal" variant="h1" sx={{
-          fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.2rem' },
-          fontWeight: 300,
-          mb: 3,
-          lineHeight: 1.15,
-          color: '#0f172a',
-          fontFamily: "'Fraunces', serif",
-          letterSpacing: '-0.02em',
-          WebkitFontSmoothing: 'none',
-          MozOsxFontSmoothing: 'unset',
-          textRendering: 'optimizeSpeed',
-        }}>
-          Egocentric manipulation datasets<br />with vision + tactile data
-        </Typography>
-
-        <Typography className="hero-reveal" variant="h5" sx={{
-          color: '#475569',
-          mb: 5,
-          fontWeight: 400,
-          maxWidth: '750px',
-          mx: 'auto',
-          lineHeight: 1.6,
-          fontSize: { xs: '1.1rem', md: '1.25rem' }
-        }}>
-          High-fidelity physical trajectories ready for robot policy training and imitation learning.
-        </Typography>
-
-        <Box className="hero-reveal" sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 8, flexWrap: 'wrap' }}>
-          <Button
-            variant="contained"
-            size="large"
-            endIcon={<Download />}
+        {/* Layer 3: Central serif text */}
+        <Box
+          className="parallax-title"
+          sx={{
+            position: 'absolute',
+            top: '20%',
+            left: '50%',
+            textAlign: 'center',
+            width: '90%',
+            maxWidth: '900px',
+            zIndex: 3,
+            color: '#fffbec',
+            willChange: 'transform',
+            pointerEvents: 'none',
+          }}
+        >
+          <Typography
+            variant="h1"
             sx={{
-              py: 1.5,
-              px: 3.5,
-              fontSize: '1rem',
-              fontWeight: 600,
-              backgroundColor: '#1f242d',
-              color: '#ffffff',
-              borderRadius: '30px',
-              '&:hover': {
-                backgroundColor: '#0f172a',
-                boxShadow: '0 8px 24px rgba(15, 23, 42, 0.25)',
-              }
+              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.8rem' },
+              fontWeight: 400,
+              fontFamily: "'Fraunces', serif",
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              textShadow: '0 4px 20px rgba(15, 23, 42, 0.25)',
+              mb: 1,
             }}
-            onClick={() => navigate('/datasets')}
           >
-            Download free sample
-          </Button>
-          <Button
-            variant="outlined"
-            size="large"
-            endIcon={<ArrowForward />}
+            The Physical Intelligence
+          </Typography>
+          <Typography
+            variant="h1"
             sx={{
-              py: 1.5,
-              px: 3.5,
-              fontSize: '1rem',
-              fontWeight: 600,
-              color: '#1e293b',
-              borderColor: 'rgba(0,0,0,0.15)',
-              borderRadius: '30px',
-              backgroundColor: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(10px)',
-              '&:hover': {
-                borderColor: '#1e293b',
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              }
+              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.8rem' },
+              fontWeight: 400,
+              fontFamily: "'Fraunces', serif",
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              textShadow: '0 4px 20px rgba(15, 23, 42, 0.25)',
             }}
-            onClick={() => navigate('/datasets')}
           >
-            View Catalogue
-          </Button>
+            Company Of New York
+          </Typography>
         </Box>
 
-        {/* Trust Signals Glass Pill */}
-        <Box className="hero-reveal" sx={{
-          display: 'inline-flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: { xs: 2, md: 3 },
-          px: 4,
-          py: 2,
-          borderRadius: '50px',
-          backgroundColor: 'rgba(255, 255, 255, 0.75)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.9)',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)'
-        }}>
-          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
-            1,200+ <span style={{ fontWeight: 400, color: '#64748b' }}>Episodes</span>
+        {/* Layer 5: Floating Glassmorphic Info Card */}
+        <Box
+          className="parallax-foreground"
+          sx={{
+            position: 'absolute',
+            bottom: '10%',
+            left: '5%',
+            maxWidth: { xs: '90%', sm: '420px' },
+            borderRadius: '24px',
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            backdropFilter: 'blur(24px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255,255,255,0.05)',
+            p: { xs: 3, md: 4 },
+            zIndex: 5,
+            willChange: 'transform',
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              color: '#fffbec',
+              fontFamily: "'Fraunces', serif",
+              fontSize: { xs: '1.6rem', md: '2rem' },
+              fontWeight: 400,
+              mb: 2,
+              lineHeight: 1.25,
+            }}
+          >
+            AI that trains robots
+            <br />
+            autonomously
           </Typography>
-          <Typography variant="body2" color="text.secondary">•</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
-            8 <span style={{ fontWeight: 400, color: '#64748b' }}>Tasks</span>
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'rgba(255, 255, 256, 0.8)',
+              fontFamily: 'inherit',
+              lineHeight: 1.6,
+              mb: 3,
+              fontSize: '0.92rem',
+            }}
+          >
+            Robostream is an applied physical AI lab collecting high-fidelity trajectories for imitation learning and robot policy training.
           </Typography>
-          <Typography variant="body2" color="text.secondary">•</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
-            LeRobot <span style={{ fontWeight: 400, color: '#64748b' }}>Format</span>
-          </Typography>
-          <Typography variant="body2" color="text.secondary">•</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 700, color: '#0f172a' }}>
-            HuggingFace <span style={{ fontWeight: 400, color: '#64748b' }}>Verified</span>
-          </Typography>
+          <Button
+            onClick={() => navigate('/datasets')}
+            sx={{
+              color: '#fffbec',
+              fontWeight: 600,
+              p: 0,
+              fontSize: '0.95rem',
+              textTransform: 'none',
+              '&:hover': {
+                backgroundColor: 'transparent',
+                textDecoration: 'underline',
+              },
+            }}
+            endIcon={<ChevronRight sx={{ ml: -0.5 }} />}
+          >
+            Get to know us
+          </Button>
         </Box>
-      </RevealSection>
+      </Box>
 
       {/* Media Highlight (Glassmorphic Preview Frame) */}
       <RevealSection Component={Container} maxWidth="lg" sx={{ mb: 12 }} once={true} selector=".media-reveal">
