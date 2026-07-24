@@ -12,6 +12,7 @@ import {
   CardContent, Button
 } from '@mui/material';
 import { GitHub, Link as LinkIcon } from '@mui/icons-material';
+import RevealSection from '../components/RevealSection';
 
 export default function About() {
   const team = [
@@ -49,8 +50,8 @@ export default function About() {
 
       <Container maxWidth="lg">
         {/* The Why */}
-        <Grid container spacing={8} alignItems="center" sx={{ mb: 12 }}>
-          <Grid size={{ xs: 12, md: 6 }}>
+        <RevealSection Component={Grid} container spacing={8} alignItems="center" sx={{ mb: 12 }} selector=".why-reveal">
+          <Grid className="why-reveal" size={{ xs: 12, md: 6 }}>
             <Typography variant="h3" sx={{
               mb: 3, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
               fontFamily: "'Fraunces', serif",
@@ -66,7 +67,7 @@ export default function About() {
               We built ROBOSTREAM to solve this. We use low-cost, high-fidelity egocentric setups (camera glasses, custom haptic gloves, and robust mounts) to collect human-level manipulation data out in the real world. No robotic arm required during collection. Just pure, multi-modal human intent formatted perfectly for imitation learning and RL pipelines.
             </Typography>
           </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
+          <Grid className="why-reveal" size={{ xs: 12, md: 6 }}>
             {/* Hardware Setup Collage */}
             <Box sx={{ position: 'relative', height: '480px' }}>
               <Box sx={{
@@ -85,11 +86,12 @@ export default function About() {
               }} />
             </Box>
           </Grid>
-        </Grid>
+        </RevealSection>
 
         {/* The Team */}
-        <Typography variant="h3" sx={{
-          mb: 6, textAlign: 'center', color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+        <RevealSection selector=".team-reveal" sx={{ mb: 12 }}>
+          <Typography className="team-reveal" variant="h3" sx={{
+            mb: 6, textAlign: 'center', color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
           fontFamily: "'Fraunces', serif",
           letterSpacing: '-0.02em',
           WebkitFontSmoothing: 'none',
@@ -98,7 +100,7 @@ export default function About() {
         }}>The Team</Typography>
         <Grid container spacing={4} justifyContent="center">
           {team.map((member) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={member.name}>
+            <Grid className="team-reveal" size={{ xs: 12, sm: 6, md: 4 }} key={member.name}>
               <Card sx={{ textAlign: 'center', overflow: 'hidden', height: '100%' }}>
                 <Box sx={{
                   p: 2,
@@ -131,9 +133,10 @@ export default function About() {
             </Grid>
           ))}
         </Grid>
+        </RevealSection>
 
         {/* Social Proof / Links */}
-        <Box sx={{
+        <RevealSection selector=".social-reveal" sx={{
           mt: 12,
           p: 6,
           backgroundColor: 'rgba(255, 255, 255, 0.75)',
@@ -143,11 +146,11 @@ export default function About() {
           boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)',
           textAlign: 'center'
         }}>
-          <Typography variant="h5" sx={{ mb: 2, color: '#0f172a', fontWeight: 700 }}>Open Source & Verified</Typography>
-          <Typography color="text.secondary" sx={{ mb: 4, maxWidth: '600px', mx: 'auto' }}>
+          <Typography className="social-reveal" variant="h5" sx={{ mb: 2, color: '#0f172a', fontWeight: 700 }}>Open Source & Verified</Typography>
+          <Typography className="social-reveal" color="text.secondary" sx={{ mb: 4, maxWidth: '600px', mx: 'auto' }}>
             We believe in contributing back. Check out our open-source scripts for processing egocentric data or view our verified dataset cards on HuggingFace.
           </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
+          <Stack className="social-reveal" direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
             <Button href="#" target="_blank" sx={{ border: '1px solid rgba(0,0,0,0.15)', borderRadius: '24px', px: 3, py: 1, color: '#0f172a', '&:hover': { borderColor: '#0f172a', backgroundColor: 'rgba(0,0,0,0.04)' } }}>
               <GitHub sx={{ mr: 1 }} /> GitHub Profile
             </Button>
@@ -155,7 +158,7 @@ export default function About() {
               <LinkIcon sx={{ mr: 1 }} /> HuggingFace
             </Button>
           </Stack>
-        </Box>
+        </RevealSection>
       </Container>
     </Box>
   );

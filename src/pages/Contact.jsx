@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { Email, Send, Hub } from '@mui/icons-material';
 import { datasets } from '../data/mockDatasets';
+import RevealSection from '../components/RevealSection';
 
 export default function Contact() {
   const [status, setStatus] = useState('idle'); // idle, submitting, success
@@ -34,9 +35,9 @@ export default function Contact() {
     <Box sx={{ pb: 12 }}>
       {/* Header */}
       <Box sx={{ pt: 8, pb: 6, textAlign: 'center' }}>
-        <Container maxWidth="md">
-          <Hub sx={{ fontSize: 44, color: '#0f172a', mb: 2 }} />
-          <Typography variant="h2" sx={{
+        <RevealSection Component={Container} maxWidth="md" selector=".contact-header-reveal" once={true}>
+          <Hub className="contact-header-reveal" sx={{ fontSize: 44, color: '#0f172a', mb: 2 }} />
+          <Typography className="contact-header-reveal" variant="h2" sx={{
             mb: 2, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
             fontFamily: "'Fraunces', serif",
             letterSpacing: '-0.02em',
@@ -44,16 +45,16 @@ export default function Contact() {
             MozOsxFontSmoothing: 'unset',
             textRendering: 'optimizeSpeed',
           }}>Get in Touch</Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ fontWeight: 400 }}>
+          <Typography className="contact-header-reveal" variant="h6" color="text.secondary" sx={{ fontWeight: 400 }}>
             Request full datasets, ask about custom collection, or just say hello.
           </Typography>
-        </Container>
+        </RevealSection>
       </Box>
 
-      <Container maxWidth="lg">
+      <RevealSection Component={Container} maxWidth="lg" selector=".contact-grid-reveal">
         <Grid container spacing={8}>
           {/* Form */}
-          <Grid size={{ xs: 12, md: 7 }}>
+          <Grid className="contact-grid-reveal" size={{ xs: 12, md: 7 }}>
             <Paper sx={{
               p: { xs: 3, md: 5 },
               borderRadius: '24px',
@@ -136,7 +137,7 @@ export default function Contact() {
           </Grid>
 
           {/* Contact Info */}
-          <Grid size={{ xs: 12, md: 5 }}>
+          <Grid className="contact-grid-reveal" size={{ xs: 12, md: 5 }}>
             <Box sx={{ position: 'sticky', top: 100 }}>
               <Typography variant="h4" sx={{
                 mb: 3, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
@@ -189,7 +190,7 @@ export default function Contact() {
             </Box>
           </Grid>
         </Grid>
-      </Container>
+      </RevealSection>
     </Box>
   );
 }

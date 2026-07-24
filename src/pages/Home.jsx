@@ -22,6 +22,7 @@ import {
   ArrowForward,
 } from '@mui/icons-material';
 import { datasets } from '../data/mockDatasets';
+import RevealSection from '../components/RevealSection';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -30,9 +31,9 @@ export default function Home() {
   return (
     <Box sx={{ pb: 8 }}>
       {/* Hero Section */}
-      <Container maxWidth="lg" sx={{ pt: { xs: 6, md: 10 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }}>
+      <RevealSection Component={Container} maxWidth="lg" sx={{ pt: { xs: 6, md: 10 }, pb: { xs: 6, md: 8 }, textAlign: 'center' }} once={true} selector=".hero-reveal">
         {/* Subtle Pill Tagline like screenshot */}
-        <Box sx={{
+        <Box className="hero-reveal" sx={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: 1,
@@ -50,7 +51,7 @@ export default function Home() {
           </Typography>
         </Box>
 
-        <Typography variant="h1" sx={{
+        <Typography className="hero-reveal" variant="h1" sx={{
           fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.2rem' },
           fontWeight: 300,
           mb: 3,
@@ -65,7 +66,7 @@ export default function Home() {
           Egocentric manipulation datasets<br />with vision + tactile data
         </Typography>
 
-        <Typography variant="h5" sx={{
+        <Typography className="hero-reveal" variant="h5" sx={{
           color: '#475569',
           mb: 5,
           fontWeight: 400,
@@ -77,7 +78,7 @@ export default function Home() {
           High-fidelity physical trajectories ready for robot policy training and imitation learning.
         </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 8, flexWrap: 'wrap' }}>
+        <Box className="hero-reveal" sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 8, flexWrap: 'wrap' }}>
           <Button
             variant="contained"
             size="large"
@@ -125,7 +126,7 @@ export default function Home() {
         </Box>
 
         {/* Trust Signals Glass Pill */}
-        <Box sx={{
+        <Box className="hero-reveal" sx={{
           display: 'inline-flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -155,11 +156,11 @@ export default function Home() {
             HuggingFace <span style={{ fontWeight: 400, color: '#64748b' }}>Verified</span>
           </Typography>
         </Box>
-      </Container>
+      </RevealSection>
 
       {/* Media Highlight (Glassmorphic Preview Frame) */}
-      <Container maxWidth="lg" sx={{ mb: 12 }}>
-        <Box sx={{
+      <RevealSection Component={Container} maxWidth="lg" sx={{ mb: 12 }} once={true} selector=".media-reveal">
+        <Box className="media-reveal" sx={{
           width: '100%',
           height: { xs: '300px', md: '480px' },
           borderRadius: '24px',
@@ -199,7 +200,7 @@ export default function Home() {
             <Typography variant="h4" sx={{ ml: 0.5 }}>▶</Typography>
           </Button>
         </Box>
-      </Container>
+      </RevealSection>
 
       {/* What We Offer */}
       <Box sx={{
@@ -209,8 +210,8 @@ export default function Home() {
         borderTop: '1px solid rgba(0, 0, 0, 0.05)',
         borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
-        <Container maxWidth="lg">
-          <Typography variant="h3" textAlign="center" sx={{
+        <RevealSection Component={Container} maxWidth="lg" selector=".offer-reveal">
+          <Typography className="offer-reveal" variant="h3" textAlign="center" sx={{
             mb: 8, color: '#0f172a', fontWeight: 500,
             lineHeight: 1.15,
             fontFamily: "'Fraunces', serif",
@@ -222,7 +223,7 @@ export default function Home() {
             The Data Pipeline
           </Typography>
           <Grid container spacing={4}>
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid className="offer-reveal" size={{ xs: 12, md: 4 }}>
               <Card sx={{
                 height: '100%',
                 overflow: 'hidden',
@@ -252,7 +253,7 @@ export default function Home() {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid className="offer-reveal" size={{ xs: 12, md: 4 }}>
               <Card sx={{
                 height: '100%',
                 overflow: 'hidden',
@@ -282,7 +283,7 @@ export default function Home() {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid className="offer-reveal" size={{ xs: 12, md: 4 }}>
               <Card sx={{
                 height: '100%',
                 overflow: 'hidden',
@@ -312,12 +313,12 @@ export default function Home() {
               </Card>
             </Grid>
           </Grid>
-        </Container>
+        </RevealSection>
       </Box>
 
       {/* Dataset Previews */}
-      <Container maxWidth="lg" sx={{ py: 12 }}>
-        <Stack direction="row" sx={{ display: 'flex', justifyContent: 'space-between', mb: 6, alignItems: 'center' }}>
+      <RevealSection Component={Container} maxWidth="lg" sx={{ py: 12 }} selector=".dataset-reveal">
+        <Stack className="dataset-reveal" direction="row" sx={{ display: 'flex', justifyContent: 'space-between', mb: 6, alignItems: 'center' }}>
           <Typography variant="h3" sx={{
             color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
             fontFamily: "'Fraunces', serif",
@@ -336,7 +337,7 @@ export default function Home() {
         </Stack>
         <Grid container spacing={4}>
           {previewDatasets.map((dataset) => (
-            <Grid size={{ xs: 12, md: 4 }} key={dataset.id}>
+            <Grid className="dataset-reveal" size={{ xs: 12, md: 4 }} key={dataset.id}>
               <Card sx={{
                 height: '100%',
                 display: 'flex',
@@ -403,7 +404,7 @@ export default function Home() {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </RevealSection>
 
       {/* Pricing Section */}
       <Box sx={{
@@ -412,8 +413,8 @@ export default function Home() {
         py: 12,
         borderTop: '1px solid rgba(0, 0, 0, 0.05)'
       }}>
-        <Container maxWidth="lg">
-          <Typography variant="h3" textAlign="center" sx={{
+        <RevealSection Component={Container} maxWidth="lg" selector=".pricing-reveal">
+          <Typography className="pricing-reveal" variant="h3" textAlign="center" sx={{
             mb: 2, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
             fontFamily: "'Fraunces', serif",
             letterSpacing: '-0.02em',
@@ -423,13 +424,13 @@ export default function Home() {
           }}>
             Simple, transparent pricing
           </Typography>
-          <Typography variant="h6" color="text.secondary" textAlign="center" sx={{ mb: 8, fontWeight: 400 }}>
+          <Typography className="pricing-reveal" variant="h6" color="text.secondary" textAlign="center" sx={{ mb: 8, fontWeight: 400 }}>
             Get exactly the data you need for your models.
           </Typography>
 
           <Grid container spacing={4} alignItems="center">
             {/* Free Tier */}
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid className="pricing-reveal" size={{ xs: 12, md: 4 }}>
               <Card sx={{ overflow: 'hidden' }}>
                 <Box sx={{ p: 2.5, backgroundColor: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
                   <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a' }}>Free Sample</Typography>
@@ -455,7 +456,7 @@ export default function Home() {
             </Grid>
 
             {/* Standard Tier */}
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid className="pricing-reveal" size={{ xs: 12, md: 4 }}>
               <Card sx={{
                 overflow: 'hidden',
                 border: '2px solid #1f242d',
@@ -487,7 +488,7 @@ export default function Home() {
             </Grid>
 
             {/* Enterprise Tier */}
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid className="pricing-reveal" size={{ xs: 12, md: 4 }}>
               <Card sx={{ overflow: 'hidden' }}>
                 <Box sx={{ p: 2.5, backgroundColor: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
                   <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a' }}>Enterprise</Typography>
@@ -512,7 +513,7 @@ export default function Home() {
               </Card>
             </Grid>
           </Grid>
-        </Container>
+        </RevealSection>
       </Box>
 
     </Box>
