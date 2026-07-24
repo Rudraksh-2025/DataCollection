@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   Box,
@@ -8,6 +8,7 @@ import {
   IconButton,
   Button,
   useTheme,
+  Drawer,
 } from '@mui/material';
 import {
   WbSunnyOutlined,
@@ -15,6 +16,8 @@ import {
   Memory,
   GitHub,
   Twitter,
+  Menu as MenuIcon,
+  Close as CloseIcon,
 } from '@mui/icons-material';
 
 const navLinks = [
@@ -27,6 +30,11 @@ const navLinks = [
 export default function Layout() {
   const theme = useTheme();
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prev) => !prev);
+  };
 
   return (
     <Box sx={{
@@ -77,7 +85,7 @@ export default function Layout() {
           alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
-          maxWidth: '680px',
+          maxWidth: { xs: '100%', md: '850px' },
           px: { xs: 2, sm: 2.5 },
           py: 1,
           borderRadius: '50px',
@@ -88,25 +96,41 @@ export default function Layout() {
           boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03)',
           transition: 'all 0.3s ease',
         }}>
-          {/* confole,logasdddaddadd */}
-          {/* Left Icon / Logo */}
-          {/* <IconButton
+          {/* Logo / Brand */}
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
             component={RouterLink}
             to="/"
-            size="small"
             sx={{
-              color: '#1e293b',
-              p: 1,
-              '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-              }
+              textDecoration: 'none',
+              color: '#0f172a',
+              '&:hover': { opacity: 0.9 }
             }}
           >
-            <WbSunnyOutlined sx={{ fontSize: 22, color: '#334155' }} />
-          </IconButton> */}
+            <Memory sx={{ color: '#0f172a', fontSize: 24 }} />
+            <Typography
+              variant="body1"
+              sx={{
+                fontFamily: '"Montserrat", sans-serif',
+                fontWeight: 800,
+                color: '#0f172a',
+                letterSpacing: '0.5px',
+                fontSize: '0.95rem'
+              }}
+            >
+              ROBOSTREAM
+            </Typography>
+          </Stack>
 
-          {/* Centered Navigation Links */}
-          <Stack direction="row" spacing={{ xs: 1, sm: 2.5 }} alignItems="center">
+          {/* Centered Navigation Links - Desktop Only */}
+          <Stack
+            direction="row"
+            spacing={{ xs: 1, sm: 2.5 }}
+            alignItems="center"
+            sx={{ display: { xs: 'none', md: 'flex' } }}
+          >
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
               return (
@@ -135,11 +159,12 @@ export default function Layout() {
             })}
           </Stack>
 
-          {/* Right Action Pill Button */}
+          {/* Right Action Pill Button - Desktop Only */}
           <Button
             component={RouterLink}
             to="/contact"
             sx={{
+              display: { xs: 'none', md: 'inline-flex' },
               backgroundColor: '#1f242d',
               color: '#ffffff',
               borderRadius: '28px',
@@ -148,7 +173,6 @@ export default function Layout() {
               fontSize: '0.85rem',
               fontWeight: 600,
               letterSpacing: '0.2px',
-              display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: 0.5,
@@ -172,8 +196,112 @@ export default function Layout() {
               <ChevronRight sx={{ fontSize: 16, color: '#ffffff' }} />
             </Box>
           </Button>
+
+          {/* Hamburger Menu Icon - Mobile Only */}
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ display: { xs: 'flex', md: 'none' }, color: '#0f172a' }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Box>
       </Box>
+
+      {/* Mobile Navigation Drawer */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: 280,
+            borderTopLeftRadius: '24px',
+            borderBottomLeftRadius: '24px',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(16px)',
+            p: 3,
+            boxShadow: '-10px 0 30px rgba(0,0,0,0.05)',
+          },
+        }}
+        anchor="right"
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <Memory sx={{ color: '#0f172a', fontSize: 24 }} />
+            <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 800, color: '#0f172a' }}>
+              ROBOSTREAM
+            </Typography>
+          </Stack>
+          <IconButton onClick={handleDrawerToggle} sx={{ color: '#0f172a' }}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        <Stack spacing={1.5} sx={{ mb: 4 }}>
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
+            return (
+              <Button
+                key={link.title}
+                component={RouterLink}
+                to={link.path}
+                onClick={handleDrawerToggle}
+                fullWidth
+                sx={{
+                  justifyContent: 'flex-start',
+                  color: isActive ? '#0f172a' : '#475569',
+                  fontWeight: isActive ? 700 : 500,
+                  fontSize: '1rem',
+                  px: 2,
+                  py: 1.2,
+                  borderRadius: '12px',
+                  backgroundColor: isActive ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                    color: '#0f172a',
+                  }
+                }}
+              >
+                {link.title}
+              </Button>
+            );
+          })}
+        </Stack>
+
+        <Button
+          component={RouterLink}
+          to="/contact"
+          onClick={handleDrawerToggle}
+          variant="contained"
+          fullWidth
+          sx={{
+            backgroundColor: '#1f242d',
+            color: '#ffffff',
+            borderRadius: '24px',
+            py: 1.5,
+            fontSize: '0.95rem',
+            fontWeight: 600,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 1,
+            '&:hover': {
+              backgroundColor: '#0f172a',
+            }
+          }}
+        >
+          Get Access
+          <ChevronRight sx={{ fontSize: 18 }} />
+        </Button>
+      </Drawer>
 
       {/* Main Content Area */}
       <Box component="main" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
