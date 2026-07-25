@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -11,6 +11,13 @@ import {
   CardMedia,
   Stack,
   Chip,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Paper,
+  Alert,
 } from '@mui/material';
 import {
   Videocam,
@@ -21,6 +28,8 @@ import {
   Work,
   ArrowForward,
   ChevronRight,
+  Send,
+  Hub,
 } from '@mui/icons-material';
 import { datasets } from '../data/mockDatasets';
 import RevealSection from '../components/RevealSection';
@@ -34,6 +43,16 @@ export default function Home() {
   const navigate = useNavigate();
   const previewDatasets = datasets.slice(0, 3);
   const parallaxRef = useRef(null);
+  const [status, setStatus] = useState('idle'); // idle, submitting, success
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setTimeout(() => {
+      setStatus('success');
+      e.target.reset();
+    }, 1500);
+  };
 
   useEffect(() => {
     const container = parallaxRef.current;
@@ -117,6 +136,7 @@ export default function Home() {
           }}
         />
 
+
         {/* Layer 3: Central serif text */}
         <Box
           className="parallax-title"
@@ -136,7 +156,7 @@ export default function Home() {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.8rem' },
+              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.5rem' },
               fontWeight: 400,
               fontFamily: "'Fraunces', serif",
               lineHeight: 1.15,
@@ -145,12 +165,12 @@ export default function Home() {
               mb: 1,
             }}
           >
-            The Physical Intelligence
+            Where Human Movement
           </Typography>
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.8rem' },
+              fontSize: { xs: '2.5rem', sm: '3.8rem', md: '4.5rem' },
               fontWeight: 400,
               fontFamily: "'Fraunces', serif",
               lineHeight: 1.15,
@@ -158,7 +178,7 @@ export default function Home() {
               textShadow: '0 4px 20px rgba(15, 23, 42, 0.25)',
             }}
           >
-            Company Of New York
+            Becomes Robot Intelligence
           </Typography>
         </Box>
 
@@ -192,9 +212,7 @@ export default function Home() {
               lineHeight: 1.25,
             }}
           >
-            AI that trains robots
-            <br />
-            autonomously
+            Trained on how  humans actually move
           </Typography>
           <Typography
             variant="body2"
@@ -206,7 +224,7 @@ export default function Home() {
               fontSize: '0.92rem',
             }}
           >
-            Robostream is an applied physical AI lab collecting high-fidelity trajectories for imitation learning and robot policy training.
+            We capture how people naturally interact with the world, then turn that footage into high-fidelity trajectories for robot policy training.
           </Typography>
           <Button
             onClick={() => navigate('/datasets')}
@@ -452,7 +470,7 @@ export default function Home() {
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 3, flexGrow: 1 }}>
                     {dataset.description.substring(0, 100)}...
                   </Typography>
-                  <Button
+                  {/* <Button
                     variant="outlined"
                     fullWidth
                     sx={{
@@ -468,7 +486,7 @@ export default function Home() {
                     onClick={() => navigate(`/datasets/${dataset.id}`)}
                   >
                     View dataset
-                  </Button>
+                  </Button> */}
                 </CardContent>
               </Card>
             </Grid>
@@ -476,111 +494,142 @@ export default function Home() {
         </Grid>
       </RevealSection>
 
-      {/* Pricing Section */}
+      {/* Get Quote Section */}
       <Box sx={{
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        backgroundColor: 'rgba(255, 255, 255, 0.45)',
         backdropFilter: 'blur(20px)',
         py: 12,
-        borderTop: '1px solid rgba(0, 0, 0, 0.05)'
+        borderTop: '1px solid rgba(0, 0, 0, 0.05)',
       }}>
-        <RevealSection Component={Container} maxWidth="lg" selector=".pricing-reveal">
-          <Typography className="pricing-reveal" variant="h3" textAlign="center" sx={{
-            mb: 2, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
-            fontFamily: "'Fraunces', serif",
-            letterSpacing: '-0.02em',
-            WebkitFontSmoothing: 'none',
-            MozOsxFontSmoothing: 'unset',
-            textRendering: 'optimizeSpeed',
-          }}>
-            Simple, transparent pricing
-          </Typography>
-          <Typography className="pricing-reveal" variant="h6" color="text.secondary" textAlign="center" sx={{ mb: 8, fontWeight: 400 }}>
-            Get exactly the data you need for your models.
-          </Typography>
+        <RevealSection Component={Container} maxWidth="lg" selector=".quote-reveal">
+          <Grid container spacing={8} alignItems="stretch">
+            {/* Info / Value Proposition */}
+            <Grid className="quote-reveal" size={{ xs: 12, md: 5 }} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <Box>
+                {/* <Box sx={{ display: 'inline-flex', p: 1.5, borderRadius: '16px', backgroundColor: 'rgba(31, 36, 45, 0.05)', mb: 3 }}>
+                  <Hub sx={{ fontSize: 32, color: '#1f242d' }} />
+                </Box> */}
+                <Typography variant="h3" sx={{
+                  mb: 3, color: '#0f172a', fontWeight: 500, lineHeight: 1.15,
+                  fontFamily: "'Fraunces', serif",
+                  letterSpacing: '-0.02em',
+                  WebkitFontSmoothing: 'none',
+                  MozOsxFontSmoothing: 'unset',
+                  textRendering: 'optimizeSpeed',
+                }}>
+                  Request a Custom Dataset Quote
+                </Typography>
+                <Typography color="text.secondary" paragraph sx={{ mb: 4, fontSize: '1.05rem', lineHeight: 1.7 }}>
+                  Need high-fidelity trajectories for a specific robotic task, custom environments, or unique multi-modal configurations?
+                </Typography>
 
-          <Grid container spacing={4} alignItems="center">
-            {/* Free Tier */}
-            <Grid className="pricing-reveal" size={{ xs: 12, md: 4 }}>
-              <Card sx={{ overflow: 'hidden' }}>
-                <Box sx={{ p: 2.5, backgroundColor: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a' }}>Free Sample</Typography>
-                </Box>
-                <CardContent sx={{ p: 4 }}>
-                  <Typography variant="h2" sx={{ mb: 3, fontWeight: 800, color: '#0f172a' }}>$0</Typography>
-                  <Stack spacing={2} sx={{ mb: 4 }}>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> 10 episodes per task
-                    </Typography>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Full sensor stack included
-                    </Typography>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Non-commercial use
-                    </Typography>
-                  </Stack>
-                  <Button variant="outlined" fullWidth size="large" sx={{ borderRadius: '24px', color: '#0f172a', borderColor: 'rgba(0,0,0,0.2)' }} onClick={() => navigate('/datasets')}>
-                    Download Now
-                  </Button>
-                </CardContent>
-              </Card>
+                <Stack spacing={3}>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <CheckCircle sx={{ color: '#0f172a', mt: 0.5 }} />
+                    <Box>
+                      <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a' }}>Tailored Trajectories</Typography>
+                      <Typography variant="body2" color="text.secondary">We set up customized task environments and collect precise teleoperation/imitation data.</Typography>
+                    </Box>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <CheckCircle sx={{ color: '#0f172a', mt: 0.5 }} />
+                    <Box>
+                      <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a' }}>Sensor Suite Alignment</Typography>
+                      <Typography variant="body2" color="text.secondary">Select from custom camera positions, resolutions, tactile sensors (FSR, IMU), or custom formats.</Typography>
+                    </Box>
+                  </Box>
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <CheckCircle sx={{ color: '#0f172a', mt: 0.5 }} />
+                    <Box>
+                      <Typography variant="body2" sx={{ fontWeight: 700, color: '#0f172a' }}>Fast Turnaround</Typography>
+                      <Typography variant="body2" color="text.secondary">Receive high-quality annotated episodes ready for model training in a matter of days.</Typography>
+                    </Box>
+                  </Box>
+                </Stack>
+              </Box>
             </Grid>
 
-            {/* Standard Tier */}
-            <Grid className="pricing-reveal" size={{ xs: 12, md: 4 }}>
-              <Card sx={{
-                overflow: 'hidden',
-                border: '2px solid #1f242d',
-                transform: { md: 'scale(1.05)' },
-                boxShadow: '0 20px 40px rgba(0,0,0,0.08)'
+            {/* Form */}
+            <Grid className="quote-reveal" size={{ xs: 12, md: 7 }}>
+              <Paper sx={{
+                p: { xs: 4, md: 6 },
+                borderRadius: '24px',
+                backgroundColor: 'rgba(255, 255, 255, 0.75)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(255, 255, 255, 0.95)',
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.04)'
               }}>
-                <Box sx={{ p: 2.5, backgroundColor: '#1f242d', color: '#ffffff' }}>
-                  <Typography variant="h6" sx={{ fontWeight: 700 }}>Standard License</Typography>
-                </Box>
-                <CardContent sx={{ p: 4 }}>
-                  <Typography variant="h2" sx={{ mb: 0.5, fontWeight: 800, color: '#0f172a' }}>$1.50</Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>per episode</Typography>
-                  <Stack spacing={2} sx={{ mb: 4 }}>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Access to full datasets
-                    </Typography>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Commercial license
-                    </Typography>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> 1 year of updates
-                    </Typography>
-                  </Stack>
-                  <Button variant="contained" fullWidth size="large" sx={{ borderRadius: '24px', backgroundColor: '#1f242d', color: '#ffffff', '&:hover': { backgroundColor: '#0f172a' } }} onClick={() => navigate('/contact')}>
-                    Purchase Dataset
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            {/* Enterprise Tier */}
-            <Grid className="pricing-reveal" size={{ xs: 12, md: 4 }}>
-              <Card sx={{ overflow: 'hidden' }}>
-                <Box sx={{ p: 2.5, backgroundColor: 'rgba(255, 255, 255, 0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0, 0, 0, 0.06)' }}>
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: '#0f172a' }}>Enterprise</Typography>
-                </Box>
-                <CardContent sx={{ p: 4 }}>
-                  <Typography variant="h2" sx={{ mb: 3, fontWeight: 800, color: '#0f172a' }}>Custom</Typography>
-                  <Stack spacing={2} sx={{ mb: 4 }}>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Custom task collection
-                    </Typography>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> Large volume discount
-                    </Typography>
-                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, color: '#334155' }}>
-                      <CheckCircle sx={{ color: '#0f172a' }} fontSize="small" /> NDA & Custom invoicing
-                    </Typography>
-                  </Stack>
-                  <Button variant="outlined" fullWidth size="large" sx={{ borderRadius: '24px', color: '#0f172a', borderColor: 'rgba(0,0,0,0.2)' }} onClick={() => navigate('/contact')}>
-                    Contact Sales
-                  </Button>
-                </CardContent>
-              </Card>
+                {status === 'success' && (
+                  <Alert severity="success" sx={{ mb: 4, borderRadius: 2 }}>
+                    Your quote request has been sent. We'll get back to you within 24 hours.
+                  </Alert>
+                )}
+                <form onSubmit={handleSubmit}>
+                  <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField fullWidth label="Name" required variant="outlined" />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField fullWidth label="Work Email" required type="email" />
+                    </Grid>
+                    <Grid size={12}>
+                      <TextField fullWidth label="Company / Institution" required />
+                    </Grid>
+                    <Grid size={12}>
+                      <FormControl fullWidth>
+                        <InputLabel>Dataset of Interest</InputLabel>
+                        <Select label="Dataset of Interest" defaultValue="">
+                          <MenuItem value="custom"><em>Custom / New Dataset</em></MenuItem>
+                          {datasets.map(d => <MenuItem key={d.id} value={d.id}>{d.name}</MenuItem>)}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <FormControl fullWidth required>
+                        <InputLabel>Intended Use Case</InputLabel>
+                        <Select label="Intended Use Case" defaultValue="">
+                          <MenuItem value="training">Training</MenuItem>
+                          <MenuItem value="evaluation">Evaluation</MenuItem>
+                          <MenuItem value="both">Both</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField fullWidth label="Approx. Episodes Needed" type="number" />
+                    </Grid>
+                    <Grid size={12}>
+                      <TextField
+                        fullWidth
+                        label="Project Details & Requirements"
+                        multiline
+                        rows={4}
+                        placeholder="Tell us about the task, camera setups, robot hardware, or custom formats needed..."
+                      />
+                    </Grid>
+                    <Grid size={12}>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        size="large"
+                        fullWidth
+                        disabled={status === 'submitting'}
+                        endIcon={<Send />}
+                        sx={{
+                          py: 1.7,
+                          fontSize: '1rem',
+                          fontWeight: 600,
+                          backgroundColor: '#1f242d',
+                          color: '#ffffff',
+                          borderRadius: '28px',
+                          '&:hover': { backgroundColor: '#0f172a' }
+                        }}
+                      >
+                        {status === 'submitting' ? 'Submitting Request...' : 'Request Quote'}
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Paper>
             </Grid>
           </Grid>
         </RevealSection>

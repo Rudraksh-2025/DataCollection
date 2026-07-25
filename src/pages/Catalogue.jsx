@@ -178,7 +178,7 @@ export default function Catalogue() {
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 3, flexGrow: 1 }}>
                   {dataset.description}
                 </Typography>
-                <Button
+                {/* <Button
                   variant="outlined"
                   fullWidth
                   sx={{
@@ -194,7 +194,7 @@ export default function Catalogue() {
                   onClick={() => navigate(`/datasets/${dataset.id}`)}
                 >
                   View details
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
           </Grid>

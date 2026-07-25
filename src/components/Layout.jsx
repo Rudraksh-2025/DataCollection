@@ -160,7 +160,7 @@ export default function Layout() {
           </Stack>
 
           {/* Right Action Pill Button - Desktop Only */}
-          <Button
+          {/* <Button
             component={RouterLink}
             to="/contact"
             sx={{
@@ -195,7 +195,7 @@ export default function Layout() {
             }}>
               <ChevronRight sx={{ fontSize: 16, color: '#ffffff' }} />
             </Box>
-          </Button>
+          </Button> */}
 
           {/* Hamburger Menu Icon - Mobile Only */}
           <IconButton
