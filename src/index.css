@@ -1,8 +1,8 @@
 :root {
   color-scheme: light;
-  background-color: #FEFFFC;
-  color: #1e293b;
-  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  background-color: #fafaf8;
+  color: #171717;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,32 +12,9 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #FEFFFC;
-  background-image: 
-    radial-gradient(circle at 50% -10%, rgba(220, 226, 235, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 85% 85%, rgba(225, 232, 240, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 15% 50%, rgba(240, 243, 248, 0.5) 0%, transparent 45%),
-    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  background-color: #fafaf8;
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-/* Glassmorphism utility classes */
-.glass-card {
-  background: rgba(255, 255, 255, 0.75) !important;
-  backdrop-filter: blur(16px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06), 0 2px 8px 0 rgba(0, 0, 0, 0.03) !important;
-}
-
-.glass-header {
-  background: rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
 }
 
 /* Custom Scrollbar */
@@ -45,37 +22,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FEFFFC;
+  background: #fafaf8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d4d4d1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Animations */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 15px rgba(30, 41, 59, 0.08);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(30, 41, 59, 0.15);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(30, 41, 59, 0.08);
-  }
+  background: #a3a39e;
 }

@@ -5,111 +5,90 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 
-
-const headingStyle = {
-  fontFamily: "'Fraunces', serif",
-  WebkitFontSmoothing: 'none',
-  MozOsxFontSmoothing: 'unset',
-  textRendering: 'optimizeSpeed',
-};
+const displayFont = "'Pixelify Sans', 'Inter', sans-serif";
 
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#1f242d', // Sleek dark charcoal/slate like screenshot pill button
+      main: '#171717',
     },
     secondary: {
-      main: '#475569', // Slate accent
+      main: '#6b6b67',
     },
     background: {
-      default: '#FEFFFC',
-      paper: 'rgba(255, 255, 255, 0.8)',
+      default: '#fafaf8',
+      paper: '#ffffff',
     },
     text: {
-      primary: '#1e293b',
-      secondary: '#64748b',
+      primary: '#171717',
+      secondary: '#6b6b67',
     },
+    divider: '#e4e4e1',
+  },
+  shape: {
+    borderRadius: 8,
   },
   typography: {
-    fontFamily: '"Montserrat", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-    h1: {
-      ...headingStyle,
-      fontWeight: 800,
-    },
-    h2: {
-      ...headingStyle,
-      fontWeight: 700,
-    },
-    h3: {
-      ...headingStyle,
-      fontWeight: 600,
-    },
-    h4: {
-      ...headingStyle,
-      fontWeight: 600,
-    },
-    h5: {
-      ...headingStyle,
-      fontWeight: 600,
-    },
-    h6: {
-      ...headingStyle,
-      fontWeight: 600,
-    },
+    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
+    h1: { fontFamily: displayFont, fontWeight: 500 },
+    h2: { fontFamily: displayFont, fontWeight: 500 },
+    h3: { fontFamily: displayFont, fontWeight: 500 },
+    h4: { fontFamily: displayFont, fontWeight: 500 },
+    h5: { fontFamily: displayFont, fontWeight: 500 },
+    h6: { fontFamily: displayFont, fontWeight: 500 },
     button: {
       textTransform: 'none',
-      fontWeight: 600,
-      letterSpacing: '0.2px'
-    }
+      fontWeight: 500,
+      letterSpacing: '0.1px',
+    },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: `
         h1, h2, h3, h4, h5, h6 {
-          font-family: 'Fraunces', serif !important;
-          -webkit-font-smoothing: none !important;
-          -moz-osx-font-smoothing: unset !important;
-          text-rendering: optimizeSpeed !important;
+          font-family: 'Pixelify Sans', 'Inter', sans-serif !important;
         }
       `,
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 24,
-          padding: '8px 20px',
+          borderRadius: 6,
+          padding: '10px 20px',
           boxShadow: 'none',
           '&:hover': {
             boxShadow: 'none',
-          }
-        }
-      }
+          },
+        },
+      },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
-          backgroundColor: 'rgba(255, 255, 255, 0.75)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.9)',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02)',
-        }
-      }
+          borderRadius: 10,
+          backgroundColor: '#ffffff',
+          border: '1px solid #e4e4e1',
+          boxShadow: 'none',
+        },
+      },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(255, 255, 255, 0.75)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.9)',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
-        }
-      }
-    }
-  }
+          backgroundColor: '#ffffff',
+          border: '1px solid #e4e4e1',
+          boxShadow: 'none',
+          backgroundImage: 'none',
+        },
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        size: 'medium',
+      },
+    },
+  },
 });
 
 function App() {

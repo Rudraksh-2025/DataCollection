@@ -7,18 +7,15 @@ import {
   Typography,
   IconButton,
   Button,
-  useTheme,
   Drawer,
 } from '@mui/material';
 import {
-  ChevronRight,
-  Memory,
   Menu as MenuIcon,
   Close as CloseIcon,
+  ChevronRight,
 } from '@mui/icons-material';
 
 const BRAND_NAME = 'Sinew';
-const CONTACT_EMAIL = 'hello@sinew.ai';
 
 const navLinks = [
   { title: 'Problem', targetId: 'problem' },
@@ -28,8 +25,13 @@ const navLinks = [
   { title: 'Team', targetId: 'team' },
 ];
 
+const monoLabel = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontSize: '0.8rem',
+  letterSpacing: '0.02em',
+};
+
 export default function Layout() {
-  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -39,7 +41,7 @@ export default function Layout() {
   const handleScroll = (targetId) => {
     const element = document.getElementById(targetId);
     if (element) {
-      const yOffset = -90; // Adjusts for the sticky navbar height
+      const yOffset = -70;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -55,113 +57,66 @@ export default function Layout() {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      position: 'relative',
-      zIndex: 1,
-      overflow: 'hidden',
-      backgroundColor: '#FEFFFC',
+      backgroundColor: '#fafaf8',
     }}>
-      {/* Decorative Subtle Light Blur Orbs */}
-      <Box sx={{
-        position: 'absolute',
-        top: '-5%',
-        left: '20%',
-        width: '500px',
-        height: '500px',
-        background: 'radial-gradient(circle, rgba(220,230,245,0.4) 0%, rgba(254,255,252,0) 70%)',
-        zIndex: -1,
-        pointerEvents: 'none',
-      }} />
-      <Box sx={{
-        position: 'absolute',
-        bottom: '10%',
-        right: '10%',
-        width: '600px',
-        height: '600px',
-        background: 'radial-gradient(circle, rgba(230,235,245,0.3) 0%, rgba(254,255,252,0) 70%)',
-        zIndex: -1,
-        pointerEvents: 'none',
-      }} />
-
-      {/* Floating Centered Glassmorphism Navbar */}
+      {/* Top bar */}
       <Box sx={{
         position: 'sticky',
-        top: 20,
+        top: 0,
         zIndex: 1100,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
+        pt: 2,
+        pb: 1,
         px: 2,
-        mb: 2,
       }}>
         <Box sx={{
+          width: '100%',
+          maxWidth: 820,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          width: '100%',
-          maxWidth: { xs: '100%', md: '850px' },
           px: { xs: 2, sm: 2.5 },
           py: 1,
-          borderRadius: '50px',
-          backgroundColor: 'rgba(255, 255, 255, 0.85)',
-          backdropFilter: 'blur(16px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-          border: '1px solid rgba(255, 255, 255, 0.95)',
-          boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03)',
-          transition: 'all 0.3s ease',
+          borderRadius: '999px',
+          backgroundColor: 'rgba(250, 250, 248, 0.8)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid #e4e4e1',
+          boxShadow: '0 6px 20px rgba(23, 23, 23, 0.06)',
         }}>
-          {/* Logo / Brand */}
-          <Stack
-            direction="row"
-            alignItems="center"
-            spacing={1}
+          <Typography
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             sx={{
-              textDecoration: 'none',
-              color: '#0f172a',
+              fontFamily: "'Pixelify Sans', sans-serif",
+              fontWeight: 500,
+              color: '#171717',
+              fontSize: '1.1rem',
               cursor: 'pointer',
-              '&:hover': { opacity: 0.9 }
             }}
           >
-            <Memory sx={{ color: '#0f172a', fontSize: 24 }} />
-            <Typography
-              variant="body1"
-              sx={{
-                fontFamily: '"Montserrat", sans-serif',
-                fontWeight: 800,
-                color: '#0f172a',
-                letterSpacing: '0.5px',
-                fontSize: '0.95rem',
-                textTransform: 'uppercase'
-              }}
-            >
-              {BRAND_NAME}
-            </Typography>
-          </Stack>
+            {BRAND_NAME}
+          </Typography>
 
-          {/* Centered Navigation Links - Desktop Only */}
           <Stack
             direction="row"
-            spacing={{ xs: 0.5, sm: 1.5 }}
-            alignItems="center"
-            sx={{ display: { xs: 'none', md: 'flex' } }}
+            spacing={0.5}
+            sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
           >
             {navLinks.map((link) => (
               <Button
                 key={link.title}
                 onClick={() => handleScroll(link.targetId)}
-                size="small"
                 sx={{
-                  color: '#475569',
-                  fontWeight: 500,
-                  fontSize: '0.9rem',
+                  ...monoLabel,
+                  color: '#6b6b67',
                   px: 1.5,
-                  py: 0.6,
-                  borderRadius: '20px',
+                  py: 0.75,
+                  borderRadius: '999px',
+                  textTransform: 'uppercase',
                   '&:hover': {
                     backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                    color: '#0f172a',
-                  }
+                    color: '#171717',
+                  },
                 }}
               >
                 {link.title}
@@ -169,50 +124,43 @@ export default function Layout() {
             ))}
           </Stack>
 
-          {/* Right Action Pill Button - Desktop Only */}
           <Button
             onClick={() => handleScroll('contact')}
             sx={{
               display: { xs: 'none', md: 'inline-flex' },
-              backgroundColor: '#1f242d',
-              color: '#ffffff',
-              borderRadius: '28px',
-              px: 2.2,
-              py: 0.8,
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              letterSpacing: '0.2px',
               alignItems: 'center',
-              justifyContent: 'center',
-              gap: 0.5,
+              gap: 0.75,
+              backgroundColor: '#171717',
+              color: '#fafaf8',
+              borderRadius: '999px',
+              pl: 2,
+              pr: 0.75,
+              py: 0.6,
+              fontSize: '0.85rem',
+              fontWeight: 500,
               '&:hover': {
-                backgroundColor: '#0f172a',
-                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
-              }
+                backgroundColor: '#000000',
+              },
             }}
           >
-            Get in Touch
-            <Box component="span" sx={{
-              display: 'inline-flex',
+            Get in touch
+            <Box sx={{
+              width: 22,
+              height: 22,
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255, 255, 255, 0.16)',
+              display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: 20,
-              height: 20,
-              borderRadius: '50%',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              ml: 0.5,
             }}>
-              <ChevronRight sx={{ fontSize: 16, color: '#ffffff' }} />
+              <ChevronRight sx={{ fontSize: 16, color: '#fafaf8' }} />
             </Box>
           </Button>
 
-          {/* Hamburger Menu Icon - Mobile Only */}
           <IconButton
-            color="inherit"
             aria-label="open drawer"
-            edge="start"
             onClick={handleDrawerToggle}
-            sx={{ display: { xs: 'flex', md: 'none' }, color: '#0f172a' }}
+            sx={{ display: { xs: 'flex', md: 'none' }, color: '#171717' }}
           >
             <MenuIcon />
           </IconButton>
@@ -224,54 +172,47 @@ export default function Layout() {
         variant="temporary"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
+        ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: 'block', md: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: 280,
-            borderTopLeftRadius: '24px',
-            borderBottomLeftRadius: '24px',
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(16px)',
+            backgroundColor: '#fafaf8',
+            border: 'none',
+            borderLeft: '1px solid #e4e4e1',
             p: 3,
-            boxShadow: '-10px 0 30px rgba(0,0,0,0.05)',
           },
         }}
         anchor="right"
       >
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <Memory sx={{ color: '#0f172a', fontSize: 24 }} />
-            <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 800, color: '#0f172a', textTransform: 'uppercase' }}>
-              {BRAND_NAME}
-            </Typography>
-          </Stack>
-          <IconButton onClick={handleDrawerToggle} sx={{ color: '#0f172a' }}>
+          <Typography sx={{ fontFamily: "'Pixelify Sans', sans-serif", fontWeight: 500, color: '#171717' }}>
+            {BRAND_NAME}
+          </Typography>
+          <IconButton onClick={handleDrawerToggle} sx={{ color: '#171717' }}>
             <CloseIcon />
           </IconButton>
         </Box>
 
-        <Stack spacing={1.5} sx={{ mb: 4 }}>
+        <Stack spacing={0.5} sx={{ mb: 4 }}>
           {navLinks.map((link) => (
             <Button
               key={link.title}
               onClick={() => handleNavClick(link.targetId)}
               fullWidth
               sx={{
+                ...monoLabel,
                 justifyContent: 'flex-start',
-                color: '#475569',
-                fontWeight: 500,
-                fontSize: '1rem',
-                px: 2,
+                color: '#6b6b67',
+                textTransform: 'uppercase',
+                px: 1.5,
                 py: 1.2,
-                borderRadius: '12px',
+                borderRadius: '6px',
                 '&:hover': {
                   backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                  color: '#0f172a',
-                }
+                  color: '#171717',
+                },
               }}
             >
               {link.title}
@@ -281,26 +222,17 @@ export default function Layout() {
 
         <Button
           onClick={() => handleNavClick('contact')}
-          variant="contained"
           fullWidth
           sx={{
-            backgroundColor: '#1f242d',
-            color: '#ffffff',
-            borderRadius: '24px',
-            py: 1.5,
-            fontSize: '0.95rem',
-            fontWeight: 600,
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 1,
-            '&:hover': {
-              backgroundColor: '#0f172a',
-            }
+            backgroundColor: '#171717',
+            color: '#fafaf8',
+            borderRadius: '6px',
+            py: 1.3,
+            fontWeight: 500,
+            '&:hover': { backgroundColor: '#000000' },
           }}
         >
-          Get in Touch
-          <ChevronRight sx={{ fontSize: 18 }} />
+          Get in touch
         </Button>
       </Drawer>
 
@@ -310,27 +242,18 @@ export default function Layout() {
       </Box>
 
       {/* Footer */}
-      <Box sx={{
-        borderTop: '1px solid rgba(0, 0, 0, 0.06)',
-        mt: 8,
-        py: 6,
-        backgroundColor: 'rgba(255, 255, 255, 0.6)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-      }}>
+      <Box sx={{ borderTop: '1px solid #e4e4e1', py: 5 }}>
         <Container maxWidth="lg">
-          <Stack direction={{ xs: 'column', md: 'row' }} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} spacing={3}>
-            <Stack direction="row" alignItems="center" spacing={1.5}>
-              <Memory sx={{ color: '#1f242d', fontSize: 24 }} />
-              <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700, color: '#0f172a', textTransform: 'uppercase' }}>
-                {BRAND_NAME}
-              </Typography>
-            </Stack>
-            <Typography variant="body2" color="text.secondary">
-              © {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
+          <Stack
+            direction={{ xs: 'column', md: 'row' }}
+            spacing={2}
+            sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+          >
+            <Typography sx={{ fontFamily: "'Pixelify Sans', sans-serif", fontWeight: 500, color: '#171717', fontSize: '1rem' }}>
+              {BRAND_NAME}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Contact: <Typography component="a" href={`mailto:${CONTACT_EMAIL}`} sx={{ color: '#0f172a', textDecoration: 'none', fontWeight: 600, '&:hover': { textDecoration: 'underline' } }}>{CONTACT_EMAIL}</Typography>
+            <Typography sx={{ ...monoLabel, color: '#8a8a85' }}>
+              © {new Date().getFullYear()} {BRAND_NAME}
             </Typography>
           </Stack>
         </Container>
