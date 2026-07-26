@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Box } from '@mui/material';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,10 +32,10 @@ export default function TextReveal({
 }) {
   const containerRef = useRef(null);
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
+  useEffect(() => {
+    if (!containerRef.current) return;
 
+    const ctx = gsap.context(() => {
       const items = containerRef.current.querySelectorAll('.gsap-reveal-item');
       if (!items.length) return;
 
@@ -75,9 +74,10 @@ export default function TextReveal({
       } else {
         gsap.fromTo(items, initialStyles, targetStyles);
       }
-    },
-    { scope: containerRef, dependencies: [children, variant, delay, scroller] }
-  );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [children, variant, delay, scroller, duration, stagger]);
 
   // Helper to render split words
   const renderWords = (text) => {

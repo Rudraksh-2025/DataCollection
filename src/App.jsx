@@ -4,10 +4,7 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Catalogue from './pages/Catalogue';
-import DatasetDetail from './pages/DatasetDetail';
-import About from './pages/About';
-import Contact from './pages/Contact';
+
 
 const headingStyle = {
   fontFamily: "'Fraunces', serif",
@@ -123,10 +120,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="datasets" element={<Catalogue />} />
-            <Route path="datasets/:id" element={<DatasetDetail />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
+            <Route path="*" element={<Home />} />
           </Route>
         </Routes>
       </BrowserRouter>

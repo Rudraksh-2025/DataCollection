@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link as RouterLink, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -11,29 +11,43 @@ import {
   Drawer,
 } from '@mui/material';
 import {
-  WbSunnyOutlined,
   ChevronRight,
   Memory,
-  GitHub,
-  Twitter,
   Menu as MenuIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
 
+const BRAND_NAME = 'Sinew';
+const CONTACT_EMAIL = 'hello@sinew.ai';
+
 const navLinks = [
-  { title: 'Home', path: '/' },
-  { title: 'About', path: '/about' },
-  { title: 'Datasets', path: '/datasets' },
-  { title: 'Contact', path: '/contact' },
+  { title: 'Problem', targetId: 'problem' },
+  { title: 'Platform', targetId: 'platform' },
+  { title: 'Data', targetId: 'data' },
+  { title: 'Verticals', targetId: 'verticals' },
+  { title: 'Team', targetId: 'team' },
 ];
 
 export default function Layout() {
   const theme = useTheme();
-  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
+  };
+
+  const handleScroll = (targetId) => {
+    const element = document.getElementById(targetId);
+    if (element) {
+      const yOffset = -90; // Adjusts for the sticky navbar height
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  const handleNavClick = (targetId) => {
+    handleScroll(targetId);
+    setMobileOpen(false);
   };
 
   return (
@@ -101,11 +115,11 @@ export default function Layout() {
             direction="row"
             alignItems="center"
             spacing={1}
-            component={RouterLink}
-            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             sx={{
               textDecoration: 'none',
               color: '#0f172a',
+              cursor: 'pointer',
               '&:hover': { opacity: 0.9 }
             }}
           >
@@ -117,52 +131,47 @@ export default function Layout() {
                 fontWeight: 800,
                 color: '#0f172a',
                 letterSpacing: '0.5px',
-                fontSize: '0.95rem'
+                fontSize: '0.95rem',
+                textTransform: 'uppercase'
               }}
             >
-              ROBOSTREAM
+              {BRAND_NAME}
             </Typography>
           </Stack>
 
           {/* Centered Navigation Links - Desktop Only */}
           <Stack
             direction="row"
-            spacing={{ xs: 1, sm: 2.5 }}
+            spacing={{ xs: 0.5, sm: 1.5 }}
             alignItems="center"
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
-              return (
-                <Button
-                  key={link.title}
-                  component={RouterLink}
-                  to={link.path}
-                  size="small"
-                  sx={{
-                    color: isActive ? '#0f172a' : '#475569',
-                    fontWeight: isActive ? 700 : 500,
-                    fontSize: '0.9rem',
-                    px: 1.5,
-                    py: 0.6,
-                    borderRadius: '20px',
-                    backgroundColor: isActive ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
-                    '&:hover': {
-                      backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                      color: '#0f172a',
-                    }
-                  }}
-                >
-                  {link.title}
-                </Button>
-              );
-            })}
+            {navLinks.map((link) => (
+              <Button
+                key={link.title}
+                onClick={() => handleScroll(link.targetId)}
+                size="small"
+                sx={{
+                  color: '#475569',
+                  fontWeight: 500,
+                  fontSize: '0.9rem',
+                  px: 1.5,
+                  py: 0.6,
+                  borderRadius: '20px',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    color: '#0f172a',
+                  }
+                }}
+              >
+                {link.title}
+              </Button>
+            ))}
           </Stack>
 
           {/* Right Action Pill Button - Desktop Only */}
-          {/* <Button
-            component={RouterLink}
-            to="/contact"
+          <Button
+            onClick={() => handleScroll('contact')}
             sx={{
               display: { xs: 'none', md: 'inline-flex' },
               backgroundColor: '#1f242d',
@@ -178,11 +187,11 @@ export default function Layout() {
               gap: 0.5,
               '&:hover': {
                 backgroundColor: '#0f172a',
-                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.25)',
+                boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
               }
             }}
           >
-            Get Access
+            Get in Touch
             <Box component="span" sx={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -195,7 +204,7 @@ export default function Layout() {
             }}>
               <ChevronRight sx={{ fontSize: 16, color: '#ffffff' }} />
             </Box>
-          </Button> */}
+          </Button>
 
           {/* Hamburger Menu Icon - Mobile Only */}
           <IconButton
@@ -216,7 +225,7 @@ export default function Layout() {
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: 'block', md: 'none' },
@@ -236,8 +245,8 @@ export default function Layout() {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <Memory sx={{ color: '#0f172a', fontSize: 24 }} />
-            <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 800, color: '#0f172a' }}>
-              ROBOSTREAM
+            <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 800, color: '#0f172a', textTransform: 'uppercase' }}>
+              {BRAND_NAME}
             </Typography>
           </Stack>
           <IconButton onClick={handleDrawerToggle} sx={{ color: '#0f172a' }}>
@@ -246,40 +255,32 @@ export default function Layout() {
         </Box>
 
         <Stack spacing={1.5} sx={{ mb: 4 }}>
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
-            return (
-              <Button
-                key={link.title}
-                component={RouterLink}
-                to={link.path}
-                onClick={handleDrawerToggle}
-                fullWidth
-                sx={{
-                  justifyContent: 'flex-start',
-                  color: isActive ? '#0f172a' : '#475569',
-                  fontWeight: isActive ? 700 : 500,
-                  fontSize: '1rem',
-                  px: 2,
-                  py: 1.2,
-                  borderRadius: '12px',
-                  backgroundColor: isActive ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
-                  '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                    color: '#0f172a',
-                  }
-                }}
-              >
-                {link.title}
-              </Button>
-            );
-          })}
+          {navLinks.map((link) => (
+            <Button
+              key={link.title}
+              onClick={() => handleNavClick(link.targetId)}
+              fullWidth
+              sx={{
+                justifyContent: 'flex-start',
+                color: '#475569',
+                fontWeight: 500,
+                fontSize: '1rem',
+                px: 2,
+                py: 1.2,
+                borderRadius: '12px',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                  color: '#0f172a',
+                }
+              }}
+            >
+              {link.title}
+            </Button>
+          ))}
         </Stack>
 
         <Button
-          component={RouterLink}
-          to="/contact"
-          onClick={handleDrawerToggle}
+          onClick={() => handleNavClick('contact')}
           variant="contained"
           fullWidth
           sx={{
@@ -298,7 +299,7 @@ export default function Layout() {
             }
           }}
         >
-          Get Access
+          Get in Touch
           <ChevronRight sx={{ fontSize: 18 }} />
         </Button>
       </Drawer>
@@ -321,18 +322,16 @@ export default function Layout() {
           <Stack direction={{ xs: 'column', md: 'row' }} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} spacing={3}>
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <Memory sx={{ color: '#1f242d', fontSize: 24 }} />
-              <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700, color: '#0f172a' }}>
-                ROBOSTREAM
+              <Typography variant="h6" sx={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700, color: '#0f172a', textTransform: 'uppercase' }}>
+                {BRAND_NAME}
               </Typography>
             </Stack>
             <Typography variant="body2" color="text.secondary">
-              © {new Date().getFullYear()} Robostream. All rights reserved.
+              © {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
             </Typography>
-            <Stack direction="row" spacing={2}>
-              <Button component={RouterLink} to="/datasets" size="small" sx={{ color: 'text.secondary', '&:hover': { color: '#0f172a' } }}>Datasets</Button>
-              <Button component={RouterLink} to="/about" size="small" sx={{ color: 'text.secondary', '&:hover': { color: '#0f172a' } }}>About</Button>
-              <Button component={RouterLink} to="/contact" size="small" sx={{ color: 'text.secondary', '&:hover': { color: '#0f172a' } }}>Contact</Button>
-            </Stack>
+            <Typography variant="body2" color="text.secondary">
+              Contact: <Typography component="a" href={`mailto:${CONTACT_EMAIL}`} sx={{ color: '#0f172a', textDecoration: 'none', fontWeight: 600, '&:hover': { textDecoration: 'underline' } }}>{CONTACT_EMAIL}</Typography>
+            </Typography>
           </Stack>
         </Container>
       </Box>
