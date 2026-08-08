@@ -4,6 +4,9 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import ScrollToTop from './components/ScrollToTop';
 
 const displayFont = "'Pixelify Sans', 'Inter', sans-serif";
 
@@ -96,9 +99,12 @@ function App() {
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>

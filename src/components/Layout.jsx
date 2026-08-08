@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -33,12 +33,21 @@ const monoLabel = {
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const onHome = location.pathname === '/';
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
   };
 
+  // Section links only resolve on the home page. From anywhere else, route
+  // home with a hash and let ScrollToTop land on the section.
   const handleScroll = (targetId) => {
+    if (!onHome) {
+      navigate(`/#${targetId}`);
+      return;
+    }
     const element = document.getElementById(targetId);
     if (element) {
       const yOffset = -70;
@@ -85,13 +94,16 @@ export default function Layout() {
           boxShadow: '0 6px 20px rgba(23, 23, 23, 0.06)',
         }}>
           <Typography
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            component={RouterLink}
+            to="/"
+            onClick={() => onHome && window.scrollTo({ top: 0, behavior: 'smooth' })}
             sx={{
               fontFamily: "'Pixelify Sans', sans-serif",
               fontWeight: 500,
               color: '#171717',
               fontSize: '1.1rem',
               cursor: 'pointer',
+              textDecoration: 'none',
             }}
           >
             {BRAND_NAME}
@@ -122,6 +134,24 @@ export default function Layout() {
                 {link.title}
               </Button>
             ))}
+            <Button
+              component={RouterLink}
+              to="/blog"
+              sx={{
+                ...monoLabel,
+                color: location.pathname.startsWith('/blog') ? '#171717' : '#6b6b67',
+                px: 1.5,
+                py: 0.75,
+                borderRadius: '999px',
+                textTransform: 'uppercase',
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                  color: '#171717',
+                },
+              }}
+            >
+              Blog
+            </Button>
           </Stack>
 
           <Button
@@ -218,6 +248,27 @@ export default function Layout() {
               {link.title}
             </Button>
           ))}
+          <Button
+            component={RouterLink}
+            to="/blog"
+            onClick={() => setMobileOpen(false)}
+            fullWidth
+            sx={{
+              ...monoLabel,
+              justifyContent: 'flex-start',
+              color: '#6b6b67',
+              textTransform: 'uppercase',
+              px: 1.5,
+              py: 1.2,
+              borderRadius: '6px',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                color: '#171717',
+              },
+            }}
+          >
+            Blog
+          </Button>
         </Stack>
 
         <Button

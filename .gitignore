@@ -12,8 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Raw pipeline captures. Way over GitHub's 100MB file limit; the web-sized
+# H.264 versions in public/videos are what the site ships.
+src/assets/*.mp4
+
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -22,3 +25,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+config.bat
